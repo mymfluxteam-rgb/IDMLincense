@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Software Store"
+version = "1.0.0"
+id = "artifacts/software-store"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22572
+
+[services.development]
+run = "pnpm --filter @workspace/software-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/software-store", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/software-store/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22572"
+BASE_PATH = "/"
