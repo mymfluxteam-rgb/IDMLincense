@@ -2,7 +2,7 @@ export type Locale = 'en' | 'my';
 export type Currency = 'USD' | 'MMK';
 
 /** Approximate display rate — for UI only, not a live rate */
-export const MMK_RATE = 2100;
+export const MMK_RATE = 4200;
 
 export function formatPrice(usdAmount: number, currency: Currency): string {
   if (currency === 'MMK') {
@@ -56,11 +56,17 @@ export const translations = {
 
     pricing: {
       badge: 'Transparent Pricing',
-      title: 'Simple, One-Time Pricing',
-      sub: 'No subscriptions, no hidden fees. Purchase a genuine lifetime license and own your software forever.',
+      title: 'Simple, Discounted Pricing',
+      sub: 'No subscriptions, no hidden fees. Choose a 1-year or lifetime license at a special discounted rate.',
+      term1Year: '1 Year',
+      termLifetime: 'Lifetime',
+      term1YearSub: 'Valid for 12 months from activation',
+      termLifetimeSub: 'One-time payment — own it forever',
+      discountBadge: '~16.67% OFF',
+      originalLabel: 'Original',
+      yourPrice: 'Your Price',
+      save: (amount: string) => `Save ${amount}`,
       oneTime: 'one-time',
-      lifetimeLicense: 'Lifetime personal license — one-time payment, no subscription.',
-      singleUser: 'Single-user license for personal or commercial use.',
       buyBtn: (price: string) => `Buy License — ${price}`,
       trialBtn: 'Download Free Trial first',
       notSure: 'Not sure which to buy?',
@@ -68,23 +74,27 @@ export const translations = {
       howToPurchase: 'How to Purchase',
       contact: 'Contact Support',
       features: {
-        idm: [
-          'Lifetime license key',
-          'All future updates included',
+        '1year': [
+          '1-year license key',
+          'All updates during the license period',
           '1 PC activation',
           'Browser integration (Chrome, Firefox, Edge)',
           'Download scheduler & queue',
           'Technical support',
         ],
-        winrar: [
+        lifetime: [
           'Lifetime license key',
-          'RAR, ZIP and 10+ formats',
-          'AES-256 encryption',
-          'Command-line support',
-          'SFX archive creation',
+          'All future updates included — forever',
+          '1 PC activation',
+          'Browser integration (Chrome, Firefox, Edge)',
+          'Download scheduler & queue',
           'Priority support',
         ],
       },
+      buyUrlIdm: 'https://www.internetdownloadmanager.com/register.html',
+      buyUrlWinrar: 'https://www.win-rar.com/register.html',
+      trialUrlIdm: 'https://www.internetdownloadmanager.com/download.html',
+      trialUrlWinrar: 'https://www.win-rar.com/download.html',
     },
 
     orderLicense: {
@@ -268,11 +278,17 @@ export const translations = {
 
     pricing: {
       badge: 'ဈေးနှုန်း ပွင့်လင်းမြင်သာမှု',
-      title: 'ရိုးရှင်းသော တစ်ကြိမ်တည်း ဈေးနှုန်း',
-      sub: 'စာရင်းသွင်းမှုများ၊ သိမ်ဝှက်ကြေးများ မရှိ။ တစ်သက်တာ တရားဝင် လိုင်စင် ဝယ်ယူပြီး ဆော့ဖ်ဝဲကို အမြဲပိုင်ဆိုင်ပါ။',
+      title: 'လျှော့ဈေး ဈေးနှုန်းများ',
+      sub: 'စာရင်းသွင်းမှုများ၊ သိမ်ဝှက်ကြေးများ မရှိ။ တစ်နှစ် သို့မဟုတ် တစ်သက်တာ လိုင်စင်ကို အထူး လျှော့ဈေးဖြင့် ရယူပါ။',
+      term1Year: 'တစ်နှစ်',
+      termLifetime: 'တစ်သက်တာ',
+      term1YearSub: 'အသက်သွင်းသည့် နေ့မှ ၁၂ လ အတွက် သုံးနိုင်သည်',
+      termLifetimeSub: 'တစ်ကြိမ် ပေးချေ — အမြဲပိုင်ဆိုင်သည်',
+      discountBadge: '~၁၆.၆၇% လျှော့',
+      originalLabel: 'မူရင်းဈေး',
+      yourPrice: 'သင့်ဈေး',
+      save: (amount: string) => `${amount} သက်သာ`,
       oneTime: 'တစ်ကြိမ်တည်း',
-      lifetimeLicense: 'တစ်သက်တာ ကိုယ်ရေး လိုင်စင် — တစ်ကြိမ် ပေးချေ၊ စာရင်းသွင်းမှု မလို',
-      singleUser: 'ကိုယ်ရေး သို့မဟုတ် စီးပွားရေး အသုံးအတွက် တစ်ဦးချင်း လိုင်စင်',
       buyBtn: (price: string) => `လိုင်စင် ဝယ်ယူ — ${price}`,
       trialBtn: 'ဦးစွာ အခမဲ့ စမ်းသုံး ဒေါင်းလုပ်',
       notSure: 'ဘယ်ဟာ ဝယ်ရမလဲ မသေချာဘူးလား?',
@@ -280,23 +296,27 @@ export const translations = {
       howToPurchase: 'ဝယ်ယူနည်း',
       contact: 'ပံ့ပိုးရေး ဆက်သွယ်',
       features: {
-        idm: [
-          'တစ်သက်တာ လိုင်စင်သော့',
-          'အနာဂတ် အပ်ဒိတ်များ အားလုံး ပါဝင်',
+        '1year': [
+          'တစ်နှစ် လိုင်စင်သော့',
+          'လိုင်စင် ကာလအတွင်း အပ်ဒိတ်များ အားလုံး ပါဝင်',
           'PC ၁ လုံး အသက်သွင်းနိုင်',
           'ဘရောင်ဇာ ပေါင်းစည်း (Chrome, Firefox, Edge)',
           'ဒေါင်းလုပ် အချိန်ဆွဲ & တန်းစီ',
           'နည်းပညာ ပံ့ပိုးမှု',
         ],
-        winrar: [
+        lifetime: [
           'တစ်သက်တာ လိုင်စင်သော့',
-          'RAR, ZIP နှင့် ဖော်မတ် ၁၀+ ပံ့ပိုး',
-          'AES-256 ကုဒ်ဝှက်',
-          'Command-line ပံ့ပိုး',
-          'SFX အာကိုင်ဗ် ဖန်တီး',
+          'အနာဂတ် အပ်ဒိတ်များ အားလုံး — အမြဲ ပါဝင်',
+          'PC ၁ လုံး အသက်သွင်းနိုင်',
+          'ဘရောင်ဇာ ပေါင်းစည်း (Chrome, Firefox, Edge)',
+          'ဒေါင်းလုပ် အချိန်ဆွဲ & တန်းစီ',
           'ဦးစားပေး ပံ့ပိုးမှု',
         ],
       },
+      buyUrlIdm: 'https://www.internetdownloadmanager.com/register.html',
+      buyUrlWinrar: 'https://www.win-rar.com/register.html',
+      trialUrlIdm: 'https://www.internetdownloadmanager.com/download.html',
+      trialUrlWinrar: 'https://www.win-rar.com/download.html',
     },
 
     orderLicense: {

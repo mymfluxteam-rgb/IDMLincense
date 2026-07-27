@@ -1,37 +1,48 @@
-import { Check, ExternalLink, HelpCircle } from 'lucide-react';
+import { Check, ExternalLink, HelpCircle, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Link } from 'wouter';
 import { useGeo } from '@/context/GeoContext';
-import { translations, formatPrice } from '@/context/translations';
+import { translations } from '@/context/translations';
+
+// Fixed prices — keyed by package then currency
+const PRICES = {
+  '1year': {
+    MMK: { original: 30000, discounted: 25000, savings: 5000 },
+    USD: { original: 7.14, discounted: 5.95, savings: 1.19 },
+  },
+  lifetime: {
+    MMK: { original: 60000, discounted: 50000, savings: 10000 },
+    USD: { original: 14.28, discounted: 11.90, savings: 2.38 },
+  },
+} as const;
+
+function fmtMMK(n: number) {
+  return `K ${n.toLocaleString()}`;
+}
+function fmtUSD(n: number) {
+  return `$${n.toFixed(2)}`;
+}
 
 export default function Pricing() {
   const { locale, currency } = useGeo();
   const t = translations[locale].pricing;
 
-  const plans = [
+  const packages = [
     {
-      name: 'Internet Download Manager',
-      icon: '⚡',
-      description: t.lifetimeLicense,
-      usdPrice: 24.95,
+      key: '1year' as const,
+      term: t.term1Year,
+      sub: t.term1YearSub,
       highlight: false,
-      featureKey: 'idm' as const,
-      trialUrl: 'https://www.internetdownloadmanager.com/download.html',
-      buyUrl: 'https://www.internetdownloadmanager.com/register.html',
-      badge: null as null | string,
+      badge: null as string | null,
     },
     {
-      name: 'WinRAR',
-      icon: '📦',
-      description: t.singleUser,
-      usdPrice: 29.0,
+      key: 'lifetime' as const,
+      term: t.termLifetime,
+      sub: t.termLifetimeSub,
       highlight: true,
-      featureKey: 'winrar' as const,
-      trialUrl: 'https://www.win-rar.com/download.html',
-      buyUrl: 'https://www.win-rar.com/register.html',
-      badge: 'Best Value',
+      badge: locale === 'my' ? 'အကောင်းဆုံး' : 'Best Value',
     },
   ];
 
@@ -46,39 +57,73 @@ export default function Pricing() {
         <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">{t.sub}</p>
       </div>
 
-      {/* Cards */}
+      {/* Package cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        {plans.map((plan) => {
-          const features = t.features[plan.featureKey];
-          const displayPrice = formatPrice(plan.usdPrice, currency);
+        {packages.map((pkg) => {
+          const prices = PRICES[pkg.key][currency];
+          const features = t.features[pkg.key];
+
+          const originalDisplay = currency === 'MMK' ? fmtMMK(prices.original) : fmtUSD(prices.original);
+          const discountedDisplay = currency === 'MMK' ? fmtMMK(prices.discounted) : fmtUSD(prices.discounted);
+          const savingsDisplay = currency === 'MMK' ? fmtMMK(prices.savings) : fmtUSD(prices.savings);
+
           return (
             <Card
-              key={plan.name}
+              key={pkg.key}
               className={`flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                plan.highlight ? 'border-2 border-primary shadow-lg' : 'border-2 hover:border-primary/40'
+                pkg.highlight
+                  ? 'border-2 border-primary shadow-lg'
+                  : 'border-2 hover:border-primary/40'
               }`}
             >
-              {plan.badge && (
+              {/* Best Value badge */}
+              {pkg.badge && (
                 <div className="absolute top-4 right-4">
-                  <Badge className="text-xs font-semibold">{plan.badge}</Badge>
+                  <Badge className="text-xs font-semibold">{pkg.badge}</Badge>
                 </div>
               )}
 
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{plan.icon}</span>
-                  <div>
-                    <CardTitle className="text-lg leading-tight">{plan.name}</CardTitle>
-                    <p className="text-sm text-muted-foreground mt-0.5">{plan.description}</p>
-                  </div>
+              <CardHeader className="pb-3">
+                {/* Term title */}
+                <div className="mb-3">
+                  <h2 className="text-2xl font-extrabold tracking-tight">{pkg.term}</h2>
+                  <p className="text-sm text-muted-foreground mt-0.5">{pkg.sub}</p>
                 </div>
-                <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-4xl font-extrabold tracking-tight">{displayPrice}</span>
+
+                {/* Discount ribbon */}
+                <div className="inline-flex items-center gap-1.5 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-full px-3 py-1 text-xs font-bold w-fit mb-3">
+                  <Tag className="h-3 w-3" />
+                  {t.discountBadge}
+                </div>
+
+                {/* Original price (strikethrough) */}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    {t.originalLabel}
+                  </span>
+                  <span className="text-base text-muted-foreground line-through decoration-red-500 decoration-2">
+                    {originalDisplay}
+                  </span>
+                </div>
+
+                {/* Discounted price */}
+                <div className="flex items-baseline gap-1.5 mt-1">
+                  <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide mr-1">
+                    {t.yourPrice}
+                  </span>
+                  <span className="text-4xl font-extrabold tracking-tight text-primary">
+                    {discountedDisplay}
+                  </span>
                   <span className="text-sm text-muted-foreground">{t.oneTime}</span>
+                </div>
+
+                {/* Savings callout */}
+                <div className="mt-2 inline-flex items-center gap-1 bg-green-100 dark:bg-green-950 text-green-700 dark:text-green-400 rounded-md px-2.5 py-1 text-xs font-semibold w-fit">
+                  ✓ {t.save(savingsDisplay)}
                 </div>
               </CardHeader>
 
-              <CardContent className="flex-1">
+              <CardContent className="flex-1 pt-0">
                 <ul className="space-y-2.5">
                   {features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm">
@@ -91,12 +136,12 @@ export default function Pricing() {
 
               <CardFooter className="flex flex-col gap-2 pt-4 border-t">
                 <Button asChild className="w-full gap-2">
-                  <a href={plan.buyUrl} target="_blank" rel="noopener noreferrer">
-                    {t.buyBtn(displayPrice)} <ExternalLink className="h-3.5 w-3.5" />
+                  <a href={t.buyUrlIdm} target="_blank" rel="noopener noreferrer">
+                    {t.buyBtn(discountedDisplay)} <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </Button>
                 <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
-                  <a href={plan.trialUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={t.trialUrlIdm} target="_blank" rel="noopener noreferrer">
                     {t.trialBtn}
                   </a>
                 </Button>
