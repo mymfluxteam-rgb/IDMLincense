@@ -29,19 +29,31 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!FORMSPREE_ENDPOINT) {
+      setError('Contact form is not configured yet. Please try again later.');
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          _subject: form.reason ? `[SoftStore] ${form.reason} — from ${form.name}` : `[SoftStore] New message from ${form.name}`,
+          reason: form.reason,
+          message: form.message,
+        }),
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? 'Something went wrong. Please try again.');
+        throw new Error(data?.errors?.[0]?.message ?? 'Something went wrong. Please try again.');
       }
       setSubmitted(true);
     } catch (err: unknown) {
