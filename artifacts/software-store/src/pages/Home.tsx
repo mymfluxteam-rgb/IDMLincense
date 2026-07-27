@@ -1,4 +1,4 @@
-import { ExternalLink, Download, ShieldCheck, Star, Zap, Clock, ArrowRight } from 'lucide-react';
+import { ExternalLink, Download, ShieldCheck, Star, Zap, Clock, ArrowRight, KeyRound } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,7 +21,8 @@ const products = [
     icon: '⚡',
     gradient: 'from-blue-500/10 to-indigo-500/10',
     accent: 'bg-blue-500',
-    trialUrl: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
+    trialUrl: 'https://www.internetdownloadmanager.com/download.html',
+    licenseDownloadUrl: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
     purchaseUrl: 'https://www.internetdownloadmanager.com/register.html',
     descKey: 'idm' as const,
     featureKey: 'idm' as const,
@@ -173,18 +174,32 @@ export default function Home() {
                   </ul>
                 </CardContent>
 
-                <CardFooter className="pt-4 border-t bg-background/50 gap-3 flex-wrap">
-                  <Button asChild variant="default" className="flex-1 gap-2 min-w-0">
-                    <a href={product.trialUrl} target="_blank" rel="noopener noreferrer">
-                      <Download className="h-4 w-4 shrink-0" />
-                      {t.freeTrial}
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="flex-1 gap-2 min-w-0">
-                    <a href={product.purchaseUrl} target="_blank" rel="noopener noreferrer">
-                      {t.buyLicense} <ExternalLink className="h-3.5 w-3.5 shrink-0" />
-                    </a>
-                  </Button>
+                <CardFooter className="pt-4 border-t bg-background/50 gap-3 flex-wrap flex-col">
+                  <div className="flex w-full gap-3">
+                    <Button asChild variant="default" className="flex-1 gap-2 min-w-0">
+                      <a href={product.trialUrl} target="_blank" rel="noopener noreferrer">
+                        <Download className="h-4 w-4 shrink-0" />
+                        {t.freeTrial}
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" className="flex-1 gap-2 min-w-0">
+                      <a href={product.purchaseUrl} target="_blank" rel="noopener noreferrer">
+                        {t.buyLicense} <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                      </a>
+                    </Button>
+                  </div>
+                  {'licenseDownloadUrl' in product && (product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl && (
+                    <Button asChild variant="secondary" className="w-full gap-2">
+                      <a
+                        href={(product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <KeyRound className="h-4 w-4 shrink-0" />
+                        {locale === 'my' ? 'လိုင်စင် ဒေါင်းလုပ်' : 'Download Licensed Version'}
+                      </a>
+                    </Button>
+                  )}
                 </CardFooter>
               </Card>
             );
