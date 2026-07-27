@@ -13,6 +13,7 @@ import Pricing from '@/pages/Pricing';
 import OrderLicense from '@/pages/OrderLicense';
 import HowToPurchase from '@/pages/HowToPurchase';
 import Contact from '@/pages/Contact';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/order-license" component={OrderLicense} />
         <Route path="/how-to-purchase" component={HowToPurchase} />
         <Route path="/contact" component={Contact} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route component={NotFound} />
       </Switch>
     </Shell>

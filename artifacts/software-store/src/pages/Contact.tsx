@@ -26,10 +26,29 @@ export default function Contact() {
 
   const [form, setForm] = useState({ name: '', email: '', reason: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? 'Something went wrong. Please try again.');
+      }
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -128,13 +147,16 @@ export default function Contact() {
                 />
               </div>
 
+              {error && (
+                <p className="text-sm text-destructive bg-destructive/10 rounded-md px-3 py-2">{error}</p>
+              )}
               <Button
                 type="submit"
                 className="w-full h-11 gap-2"
-                disabled={!form.name || !form.email || !form.message}
+                disabled={!form.name || !form.email || !form.message || loading}
               >
                 <Mail className="h-4 w-4" />
-                {t.submitBtn}
+                {loading ? 'Sending…' : t.submitBtn}
               </Button>
             </form>
           </CardContent>
