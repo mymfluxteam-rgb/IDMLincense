@@ -6,11 +6,11 @@ import NotFound from '@/pages/not-found';
 import { Shell } from '@/components/layout/Shell';
 
 // Pages
-import Catalog from '@/pages/Catalog';
-import ProductDetail from '@/pages/ProductDetail';
-import OrderLookup from '@/pages/OrderLookup';
-import OrderConfirmation from '@/pages/OrderConfirmation';
-import AdminDashboard from '@/pages/AdminDashboard';
+import Home from '@/pages/Home';
+import Pricing from '@/pages/Pricing';
+import OrderLicense from '@/pages/OrderLicense';
+import HowToPurchase from '@/pages/HowToPurchase';
+import Contact from '@/pages/Contact';
 
 const queryClient = new QueryClient();
 
@@ -18,11 +18,11 @@ function Router() {
   return (
     <Shell>
       <Switch>
-        <Route path="/" component={Catalog} />
-        <Route path="/products/:id" component={ProductDetail} />
-        <Route path="/orders/lookup" component={OrderLookup} />
-        <Route path="/orders/:id" component={OrderConfirmation} />
-        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/" component={Home} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/order-license" component={OrderLicense} />
+        <Route path="/how-to-purchase" component={HowToPurchase} />
+        <Route path="/contact" component={Contact} />
         <Route component={NotFound} />
       </Switch>
     </Shell>
