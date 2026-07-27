@@ -15,6 +15,7 @@ export * from './order';
 export * from './orderInput';
 export * from './pricingTier';
 export * from './product';
+export * from './productFeature';
 export * from './productInput';
 export * from './productUpdate';
 export * from './storeStats';

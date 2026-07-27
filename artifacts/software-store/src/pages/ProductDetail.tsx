@@ -3,7 +3,7 @@ import { useGetProduct, getGetProductQueryKey } from '@workspace/api-client-reac
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, ArrowLeft, DownloadCloud, ExternalLink, Tag } from 'lucide-react';
+import { Loader2, ArrowLeft, DownloadCloud, ExternalLink, Tag, CheckCircle2 } from 'lucide-react';
 
 export default function ProductDetail() {
   const [, params] = useRoute('/products/:id');
@@ -84,6 +84,23 @@ export default function ProductDetail() {
               </div>
             )}
           </div>
+
+          {product.features && product.features.length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4 border-b pb-2">Features After Registration</h3>
+              <ul className="space-y-3">
+                {product.features.map((feature) => (
+                  <li key={feature.title} className="flex gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-medium text-sm">{feature.title}</span>
+                      <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div>
             <h3 className="text-lg font-semibold mb-4 border-b pb-2">Technical Specifications</h3>

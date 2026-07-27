@@ -279,6 +279,15 @@ components:
         error:
           type: string
 
+    ProductFeature:
+      type: object
+      required: [title, description]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+
     PricingTier:
       type: object
       required: [label, price, discountPercent, discountPrice]
@@ -316,6 +325,10 @@ components:
           type: ["array", "null"]
           items:
             $ref: "#/components/schemas/PricingTier"
+        features:
+          type: ["array", "null"]
+          items:
+            $ref: "#/components/schemas/ProductFeature"
         createdAt:
           type: string
         updatedAt:
@@ -349,6 +362,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PricingTier"
+        features:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductFeature"
 
     ProductUpdate:
       type: object
@@ -373,6 +390,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PricingTier"
+        features:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductFeature"
 
     Order:
       type: object

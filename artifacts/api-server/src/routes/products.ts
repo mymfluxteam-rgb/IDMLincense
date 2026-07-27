@@ -36,6 +36,7 @@ router.get("/products", async (req, res): Promise<void> => {
     price: parseFloat(p.price),
     imageUrl: p.imageUrl ?? null,
     pricingTiers: p.pricingTiers ?? null,
+    features: p.features ?? null,
     createdAt: p.createdAt.toISOString(),
     updatedAt: p.updatedAt.toISOString(),
   }));
@@ -61,6 +62,7 @@ router.post("/products", async (req, res): Promise<void> => {
       imageUrl: parsed.data.imageUrl ?? null,
       downloadUrl: parsed.data.downloadUrl,
       pricingTiers: parsed.data.pricingTiers ?? null,
+      features: (parsed.data as { features?: unknown }).features ?? null,
     })
     .returning();
 
@@ -70,6 +72,7 @@ router.post("/products", async (req, res): Promise<void> => {
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
       pricingTiers: product.pricingTiers ?? null,
+      features: product.features ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })
@@ -99,6 +102,7 @@ router.get("/products/:id", async (req, res): Promise<void> => {
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
       pricingTiers: product.pricingTiers ?? null,
+      features: product.features ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })
@@ -127,6 +131,7 @@ router.patch("/products/:id", async (req, res): Promise<void> => {
   if (parsed.data.imageUrl !== undefined) updates.imageUrl = parsed.data.imageUrl;
   if (parsed.data.downloadUrl !== undefined) updates.downloadUrl = parsed.data.downloadUrl;
   if (parsed.data.pricingTiers !== undefined) updates.pricingTiers = parsed.data.pricingTiers;
+  if ((parsed.data as { features?: unknown }).features !== undefined) updates.features = (parsed.data as { features?: unknown }).features;
 
   const [product] = await db
     .update(productsTable)
@@ -145,6 +150,7 @@ router.patch("/products/:id", async (req, res): Promise<void> => {
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
       pricingTiers: product.pricingTiers ?? null,
+      features: product.features ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })

@@ -39,6 +39,10 @@ export const ListProductsResponseItem = zod.object({
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
 })).nullish(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
+})).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -70,6 +74,10 @@ export const CreateProductBody = zod.object({
   "price": zod.number(),
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
+})).optional(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
 })).optional()
 })
 
@@ -87,6 +95,10 @@ export const CreateProductResponse = zod.object({
   "price": zod.number(),
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
+})).nullish(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
 })).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
@@ -114,6 +126,10 @@ export const GetProductResponse = zod.object({
   "price": zod.number(),
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
+})).nullish(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
 })).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
@@ -145,6 +161,10 @@ export const UpdateProductBody = zod.object({
   "price": zod.number(),
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
+})).optional(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
 })).optional()
 })
 
@@ -162,6 +182,10 @@ export const UpdateProductResponse = zod.object({
   "price": zod.number(),
   "discountPercent": zod.number(),
   "discountPrice": zod.number()
+})).nullish(),
+  "features": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string()
 })).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()

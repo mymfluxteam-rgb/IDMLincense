@@ -17,6 +17,10 @@ export const productsTable = pgTable("products", {
     discountPercent: number;
     discountPrice: number;
   }>>(),
+  features: jsonb("features").$type<Array<{
+    title: string;
+    description: string;
+  }>>(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

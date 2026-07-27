@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { PricingTier } from './pricingTier';
+import type { ProductFeature } from './productFeature';
 
 export interface ProductInput {
   /** @minLength 1 */
@@ -22,4 +23,5 @@ export interface ProductInput {
   /** @minLength 1 */
   downloadUrl: string;
   pricingTiers?: PricingTier[];
+  features?: ProductFeature[];
 }

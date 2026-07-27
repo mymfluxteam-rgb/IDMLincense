@@ -13,6 +13,11 @@ export interface ErrorResponse {
   error: string;
 }
 
+export interface ProductFeature {
+  title: string;
+  description: string;
+}
+
 export interface PricingTier {
   label: string;
   price: number;
@@ -32,6 +37,8 @@ export interface Product {
   downloadUrl: string;
   /** @nullable */
   pricingTiers?: PricingTier[] | null;
+  /** @nullable */
+  features?: ProductFeature[] | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -51,6 +58,7 @@ export interface ProductInput {
   /** @minLength 1 */
   downloadUrl: string;
   pricingTiers?: PricingTier[];
+  features?: ProductFeature[];
 }
 
 export interface ProductUpdate {
@@ -64,6 +72,7 @@ export interface ProductUpdate {
   imageUrl?: string;
   downloadUrl?: string;
   pricingTiers?: PricingTier[];
+  features?: ProductFeature[];
 }
 
 export interface Order {
