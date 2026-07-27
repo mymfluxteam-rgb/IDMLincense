@@ -22,7 +22,6 @@ const products = [
     gradient: 'from-blue-500/10 to-indigo-500/10',
     accent: 'bg-blue-500',
     trialUrl: 'https://www.internetdownloadmanager.com/download.html',
-    licenseDownloadUrl: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
     purchaseUrl: 'https://www.internetdownloadmanager.com/register.html',
     descKey: 'idm' as const,
     featureKey: 'idm' as const,
@@ -174,58 +173,75 @@ export default function Home() {
                   </ul>
                 </CardContent>
 
-                <CardFooter className="pt-4 border-t bg-background/50 gap-3 flex-wrap flex-col">
-                  <div className="flex w-full gap-3">
-                    <Button asChild variant="default" className="flex-1 gap-2 min-w-0">
-                      <a href={product.trialUrl} target="_blank" rel="noopener noreferrer">
-                        <Download className="h-4 w-4 shrink-0" />
-                        {t.freeTrial}
-                      </a>
-                    </Button>
-                    <Button asChild variant="outline" className="flex-1 gap-2 min-w-0">
-                      <a href={product.purchaseUrl} target="_blank" rel="noopener noreferrer">
-                        {t.buyLicense} <ExternalLink className="h-3.5 w-3.5 shrink-0" />
-                      </a>
-                    </Button>
-                  </div>
-                  {'licenseDownloadUrl' in product && (product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl && (
-                    <div className="w-full space-y-3">
-                      <Button asChild variant="secondary" className="w-full gap-2">
-                        <a
-                          href={(product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <KeyRound className="h-4 w-4 shrink-0" />
-                          {locale === 'my' ? 'လိုင်စင် ဆော့ဖ်ဝဲ ဒေါင်းလုပ်' : 'License Software Download'}
-                        </a>
-                      </Button>
-                      <ol className="space-y-1.5 text-xs text-muted-foreground pl-1">
-                        <li className="flex gap-2">
-                          <span className="font-bold text-primary shrink-0">1.</span>
-                          {locale === 'my'
-                            ? 'Tool ကို ဒေါင်းလုပ်ဆွဲပြီး ဖွင့်ပါ'
-                            : 'Download the tool and open it'}
-                        </li>
-                        <li className="flex gap-2">
-                          <span className="font-bold text-primary shrink-0">2.</span>
-                          {locale === 'my'
-                            ? 'HWID ကို ကူးယူပြီး မှာယူမှု field တွင် ဖြည့်သွင်းကာ မှတ်ပုံတင်ပါ'
-                            : 'Copy the HWID and fill it in the order field and register'}
-                        </li>
-                        <li className="flex gap-2">
-                          <span className="font-bold text-primary shrink-0">3.</span>
-                          {locale === 'my'
-                            ? 'ထို့နောက် Telegram မှတဆင့် ကျွန်ုပ်တို့ team သို့ ပေးပို့ပါ'
-                            : 'Then send it to our team via Telegram'}
-                        </li>
-                      </ol>
-                    </div>
-                  )}
+                <CardFooter className="pt-4 border-t bg-background/50 gap-3 flex-wrap">
+                  <Button asChild variant="default" className="flex-1 gap-2 min-w-0">
+                    <a href={product.trialUrl} target="_blank" rel="noopener noreferrer">
+                      <Download className="h-4 w-4 shrink-0" />
+                      {t.freeTrial}
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" className="flex-1 gap-2 min-w-0">
+                    <a href={product.purchaseUrl} target="_blank" rel="noopener noreferrer">
+                      {t.buyLicense} <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                    </a>
+                  </Button>
                 </CardFooter>
               </Card>
             );
           })}
+        </div>
+
+        {/* License Software Download — standalone card */}
+        <div className="mt-8">
+          <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 overflow-hidden">
+            <CardContent className="p-6 md:p-8">
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
+                {/* Left: title + steps */}
+                <div className="flex-1 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 shrink-0">
+                      <KeyRound className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold leading-tight">
+                        {locale === 'my' ? 'လိုင်စင် ဆော့ဖ်ဝဲ ဒေါင်းလုပ်' : 'License Software Download'}
+                      </h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {locale === 'my' ? 'ဝယ်ယူပြီးသောသူများအတွက်' : 'For customers who have already purchased'}
+                      </p>
+                    </div>
+                  </div>
+                  <ol className="space-y-2">
+                    {[
+                      locale === 'my' ? 'Tool ကို ဒေါင်းလုပ်ဆွဲပြီး ဖွင့်ပါ' : 'Download the tool and open it',
+                      locale === 'my' ? 'HWID ကို ကူးယူပြီး မှာယူမှု field တွင် ဖြည့်သွင်းကာ မှတ်ပုံတင်ပါ' : 'Copy the HWID and fill it in the order field and register',
+                      locale === 'my' ? 'ထို့နောက် Telegram မှတဆင့် ကျွန်ုပ်တို့ team သို့ ပေးပို့ပါ' : 'Then send it to our team via Telegram',
+                    ].map((step, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm">
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold mt-0.5">
+                          {i + 1}
+                        </span>
+                        <span className="text-muted-foreground leading-relaxed">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                {/* Right: download button */}
+                <div className="md:w-56 shrink-0">
+                  <Button asChild className="w-full gap-2 h-12 text-base font-semibold shadow-md">
+                    <a
+                      href="https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="h-5 w-5 shrink-0" />
+                      {locale === 'my' ? 'ဒေါင်းလုပ်' : 'Download Now'}
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* CTA strip */}
