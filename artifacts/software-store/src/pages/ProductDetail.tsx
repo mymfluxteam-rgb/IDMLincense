@@ -213,11 +213,6 @@ export default function ProductDetail() {
                 
                 <div className="space-y-3">
                   <Button asChild className="w-full" variant="default">
-                    <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
-                      <DownloadCloud className="mr-2 h-4 w-4" /> Download Software
-                    </a>
-                  </Button>
-                  <Button asChild className="w-full" variant="outline">
                     <Link href={`/orders/${successfulOrder.id}`}>
                       View Full Receipt
                     </Link>
