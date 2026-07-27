@@ -93,7 +93,7 @@ export const translations = {
       },
       buyUrlIdm: 'https://www.internetdownloadmanager.com/register.html',
       buyUrlWinrar: 'https://www.win-rar.com/register.html',
-      trialUrlIdm: 'https://www.internetdownloadmanager.com/download.html',
+      trialUrlIdm: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
       trialUrlWinrar: 'https://www.win-rar.com/download.html',
     },
 
@@ -315,7 +315,7 @@ export const translations = {
       },
       buyUrlIdm: 'https://www.internetdownloadmanager.com/register.html',
       buyUrlWinrar: 'https://www.win-rar.com/register.html',
-      trialUrlIdm: 'https://www.internetdownloadmanager.com/download.html',
+      trialUrlIdm: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
       trialUrlWinrar: 'https://www.win-rar.com/download.html',
     },
 

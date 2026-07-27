@@ -21,7 +21,7 @@ const products = [
     icon: '⚡',
     gradient: 'from-blue-500/10 to-indigo-500/10',
     accent: 'bg-blue-500',
-    trialUrl: 'https://www.internetdownloadmanager.com/download.html',
+    trialUrl: 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY',
     purchaseUrl: 'https://www.internetdownloadmanager.com/register.html',
     descKey: 'idm' as const,
     featureKey: 'idm' as const,
