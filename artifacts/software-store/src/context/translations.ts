@@ -131,33 +131,33 @@ export const translations = {
       steps: [
         {
           number: '01',
-          title: 'Choose Your Software',
-          body: "Browse our catalog and select the software you need — Internet Download Manager (IDM) or WinRAR. Click 'Buy License' to go to the official publisher's secure checkout page.",
+          title: 'Install and Open the License Software',
+          body: 'Download our license tool from the "License Software Download" section on the home page. Install and open it — it will display your unique HWID.',
         },
         {
           number: '02',
-          title: 'Try Before You Buy (Optional)',
-          body: 'Both IDM and WinRAR offer free trial versions. Download and test the software before committing to a purchase. Trials are fully functional with minor reminders to register.',
+          title: 'Copy Your HWID and Place Your Order',
+          body: 'Copy the HWID shown in the license tool. Go to Order License, select your product and license type, then fill in your email and HWID to submit your order.',
         },
         {
           number: '03',
-          title: 'Complete Payment',
-          body: 'On the official publisher website, fill in your name, email address, and payment details. Both publishers accept major credit/debit cards and PayPal. Payment is processed securely via SSL.',
+          title: 'Contact Our Team via Telegram',
+          body: 'After placing your order, contact our support team on Telegram with your order details. Our team will verify and confirm your request.',
         },
         {
           number: '04',
-          title: 'Receive Your License Key',
-          body: "After payment is confirmed, you'll receive an email with your unique license/serial key. Check your spam folder if it doesn't arrive within 10 minutes.",
+          title: 'Complete Payment and Receive Your License Key',
+          body: "After payment is confirmed, our team will send you a valid license key to your registered email address. Check your spam folder if it doesn't arrive within 10 minutes.",
         },
         {
           number: '05',
-          title: 'Activate Your Software',
-          body: "Open the installed software, navigate to Registration (IDM: Help → Register; WinRAR: Help → Enter license key), and enter the key exactly as provided. You're fully licensed!",
+          title: 'Enter the Key and Unlock Full Features',
+          body: 'Enter the license key in the software registration field (IDM: Help → Register; WinRAR: Help → Enter license key). Once activated, all premium features are unlocked — no more trial limitations.',
         },
       ],
       readyTitle: 'Ready to get started?',
-      buyIdm: 'Buy IDM License',
-      buyWinrar: 'Buy WinRAR License',
+      buyIdm: 'Order IDM License',
+      buyWinrar: 'Order WinRAR License',
       faqTitle: 'Frequently Asked Questions',
       faqs: [
         {
@@ -353,33 +353,33 @@ export const translations = {
       steps: [
         {
           number: '၀၁',
-          title: 'ဆော့ဖ်ဝဲ ရွေးချယ်ပါ',
-          body: "ကျွန်ုပ်တို့ ကတ်တလောဂ်တွင် ကြည့်ရှုပြီး လိုအပ်သော ဆော့ဖ်ဝဲ — IDM သို့မဟုတ် WinRAR — ရွေးချယ်ပါ။ 'လိုင်စင် ဝယ်ယူ' ကို နှိပ်ပြီး တရားဝင် ထုတ်ဝေသူ၏ ငွေပေးချေမှု စာမျက်နှာသို့ သွားပါ။",
+          title: 'လိုင်စင် ဆော့ဖ်ဝဲ ထည့်သွင်းပြီး ဖွင့်ပါ',
+          body: 'ပင်မစာမျက်နှာ "License Software Download" အပိုင်းမှ license tool ကို ဒေါင်းလုပ်ဆွဲပါ။ ထည့်သွင်းပြီး ဖွင့်လျှင် သင့် HWID ကို ပြပါမည်။',
         },
         {
           number: '၀၂',
-          title: 'ဝယ်မနှိပ်ခင် စမ်းကြည့်ပါ (ရွေးချယ်နိုင်)',
-          body: 'IDM နှင့် WinRAR နှစ်ခုစလုံး အခမဲ့ စမ်းသုံးဗားရှင်း ပေးသည်။ ဝယ်ယူမတိုင်မီ ဆော့ဖ်ဝဲကို ဒေါင်းလုပ်ဆွဲပြီး စမ်းသုံးကြည့်ပါ။',
+          title: 'HWID ကူးယူပြီး မှာယူမှု ဖောင် ဖြည့်ပါ',
+          body: 'License tool တွင် ပြထားသော HWID ကို ကူးယူပါ။ Order License တွင် ထုတ်ကုန်၊ လိုင်စင် အမျိုးအစား၊ အီးမေးလ် နှင့် HWID ဖြည့်သွင်းပြီး မှာယူမှု ပေးပို့ပါ။',
         },
         {
           number: '၀၃',
-          title: 'ငွေပေးချေမှု ပြီးအောင် လုပ်ပါ',
-          body: 'တရားဝင် ထုတ်ဝေသူ ဝဘ်ဆိုဒ်တွင် သင့် နာမည်၊ အီးမေးလ် နှင့် ငွေပေးချေမှု အသေးစိတ် ဖြည့်သွင်းပါ။ ကတ်ဒ် နှင့် PayPal လက်ခံသည်။',
+          title: 'Telegram မှတဆင့် ကျွန်ုပ်တို့ team ကို ဆက်သွယ်ပါ',
+          body: 'မှာယူမှု ပေးပို့ပြီးနောက် Telegram တွင် ကျွန်ုပ်တို့ ပံ့ပိုးရေးအဖွဲ့ကို မှာယူမှု အသေးစိတ်နှင့် ဆက်သွယ်ပါ။ ကျွန်ုပ်တို့ အဖွဲ့ စစ်ဆေးပြီး အတည်ပြုပေးမည်။',
         },
         {
           number: '၀၄',
-          title: 'လိုင်စင်သော့ လက်ခံရယူပါ',
-          body: 'ငွေပေးချေမှု အတည်ပြုပြီးနောက် သင့် ထူးခြားသော လိုင်စင်/စီရီရယ်သော့ပါ အီးမေးလ် ရပါမည်။ မိနစ် ၁၀ အတွင်း မရောက်လျှင် spam folder စစ်ဆေးပါ။',
+          title: 'ငွေပေးချေပြီးနောက် လိုင်စင်သော့ လက်ခံရယူပါ',
+          body: 'ငွေပေးချေမှု အတည်ပြုပြီးနောက် ကျွန်ုပ်တို့ အဖွဲ့သည် လိုင်စင်သော့ကို မှတ်ပုံတင်ထားသော အီးမေးလ် လိပ်စာသို့ ပေးပို့မည်။ မိနစ် ၁၀ အတွင်း မရောက်လျှင် spam folder စစ်ဆေးပါ။',
         },
         {
           number: '၀၅',
-          title: 'ဆော့ဖ်ဝဲ အသက်သွင်းပါ',
-          body: 'ထည့်သွင်းထားသော ဆော့ဖ်ဝဲ ဖွင့်ပြီး မှတ်ပုံတင်ခြင်း (IDM: Help → Register; WinRAR: Help → Enter license key) သို့ သွားကာ သော့ ထည့်သွင်းပါ။',
+          title: 'သော့ ထည့်သွင်းပြီး features အပြည့် ရယူပါ',
+          body: 'ဆော့ဖ်ဝဲ မှတ်ပုံတင်ခြင်း field တွင် လိုင်စင်သော့ ထည့်သွင်းပါ (IDM: Help → Register; WinRAR: Help → Enter license key)။ အသက်သွင်းပြီးသောအခါ premium features အားလုံး ရရှိမည် — trial ကန့်သတ်ချက်များ ပျောက်သွားမည်။',
         },
       ],
       readyTitle: 'စတင်ရန် အသင့်ဖြစ်ပြီလား?',
-      buyIdm: 'IDM လိုင်စင် ဝယ်ယူ',
-      buyWinrar: 'WinRAR လိုင်စင် ဝယ်ယူ',
+      buyIdm: 'IDM လိုင်စင် မှာယူ',
+      buyWinrar: 'WinRAR လိုင်စင် မှာယူ',
       faqTitle: 'မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ',
       faqs: [
         {

@@ -1,17 +1,17 @@
-import { ShoppingCart, Mail, KeyRound, MonitorSmartphone, HelpCircle, ExternalLink } from 'lucide-react';
+import { MonitorSmartphone, KeyRound, Send, Mail, Star, HelpCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { useGeo } from '@/context/GeoContext';
 import { translations } from '@/context/translations';
 
-const stepIcons = [ShoppingCart, MonitorSmartphone, ShoppingCart, Mail, KeyRound];
+const stepIcons = [MonitorSmartphone, KeyRound, Send, Mail, Star];
 const stepColors = [
   'bg-blue-500/10 text-blue-500',
   'bg-purple-500/10 text-purple-500',
+  'bg-orange-500/10 text-orange-500',
   'bg-green-500/10 text-green-500',
   'bg-yellow-500/10 text-yellow-500',
-  'bg-red-500/10 text-red-500',
 ];
 
 export default function HowToPurchase() {
@@ -58,14 +58,10 @@ export default function HowToPurchase() {
         <h2 className="font-bold text-base mb-4 text-center">{t.readyTitle}</h2>
         <div className="flex flex-wrap gap-3 justify-center">
           <Button asChild size="sm" className="gap-2">
-            <a href="https://www.internetdownloadmanager.com/register.html" target="_blank" rel="noopener noreferrer">
-              {t.buyIdm} <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+            <Link href="/order-license">{t.buyIdm}</Link>
           </Button>
           <Button asChild size="sm" variant="outline" className="gap-2">
-            <a href="https://www.win-rar.com/register.html" target="_blank" rel="noopener noreferrer">
-              {t.buyWinrar} <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+            <Link href="/order-license">{t.buyWinrar}</Link>
           </Button>
         </div>
       </div>

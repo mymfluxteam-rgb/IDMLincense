@@ -15,7 +15,7 @@ const products = [
     name: 'Internet Download Manager',
     shortName: 'IDM',
     version: '6.42',
-    usdPrice: 24.95,
+    usdPrice: 5.95,
     badge: 'Most Popular',
     badgeVariant: 'default' as const,
     icon: '⚡',
@@ -31,7 +31,7 @@ const products = [
     name: 'WinRAR',
     shortName: 'WinRAR',
     version: '7.10',
-    usdPrice: 29.0,
+    usdPrice: 5.95,
     badge: 'Trusted Worldwide',
     badgeVariant: 'secondary' as const,
     icon: '📦',
@@ -180,10 +180,8 @@ export default function Home() {
                       {t.freeTrial}
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="flex-1 gap-2 min-w-0">
-                    <a href={product.purchaseUrl} target="_blank" rel="noopener noreferrer">
-                      {t.buyLicense} <ExternalLink className="h-3.5 w-3.5 shrink-0" />
-                    </a>
+                  <Button asChild variant="outline" className="flex-1 min-w-0">
+                    <Link href="/order-license">{t.buyLicense}</Link>
                   </Button>
                 </CardFooter>
               </Card>
