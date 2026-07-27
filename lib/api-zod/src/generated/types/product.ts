@@ -5,6 +5,7 @@
  * Software delivery store API
  * OpenAPI spec version: 0.1.0
  */
+import type { PricingTier } from './pricingTier';
 
 export interface Product {
   id: number;
@@ -16,6 +17,8 @@ export interface Product {
   /** @nullable */
   imageUrl: string | null;
   downloadUrl: string;
+  /** @nullable */
+  pricingTiers?: PricingTier[] | null;
   createdAt: string;
   updatedAt: string;
 }

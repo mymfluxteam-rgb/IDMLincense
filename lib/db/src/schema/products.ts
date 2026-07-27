@@ -1,4 +1,4 @@
-import { pgTable, text, serial, timestamp, numeric } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, timestamp, numeric, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
@@ -11,6 +11,12 @@ export const productsTable = pgTable("products", {
   category: text("category").notNull(),
   imageUrl: text("image_url"),
   downloadUrl: text("download_url").notNull(),
+  pricingTiers: jsonb("pricing_tiers").$type<Array<{
+    label: string;
+    price: number;
+    discountPercent: number;
+    discountPrice: number;
+  }>>(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

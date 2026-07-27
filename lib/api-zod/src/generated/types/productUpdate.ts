@@ -5,6 +5,7 @@
  * Software delivery store API
  * OpenAPI spec version: 0.1.0
  */
+import type { PricingTier } from './pricingTier';
 
 export interface ProductUpdate {
   /** @minLength 1 */
@@ -16,4 +17,5 @@ export interface ProductUpdate {
   category?: string;
   imageUrl?: string;
   downloadUrl?: string;
+  pricingTiers?: PricingTier[];
 }

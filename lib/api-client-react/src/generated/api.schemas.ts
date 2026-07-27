@@ -13,6 +13,13 @@ export interface ErrorResponse {
   error: string;
 }
 
+export interface PricingTier {
+  label: string;
+  price: number;
+  discountPercent: number;
+  discountPrice: number;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -23,6 +30,8 @@ export interface Product {
   /** @nullable */
   imageUrl: string | null;
   downloadUrl: string;
+  /** @nullable */
+  pricingTiers?: PricingTier[] | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,6 +50,7 @@ export interface ProductInput {
   imageUrl?: string;
   /** @minLength 1 */
   downloadUrl: string;
+  pricingTiers?: PricingTier[];
 }
 
 export interface ProductUpdate {
@@ -53,6 +63,7 @@ export interface ProductUpdate {
   category?: string;
   imageUrl?: string;
   downloadUrl?: string;
+  pricingTiers?: PricingTier[];
 }
 
 export interface Order {

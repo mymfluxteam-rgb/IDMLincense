@@ -13,6 +13,7 @@ export * from './listProductsParams';
 export * from './lookupOrdersParams';
 export * from './order';
 export * from './orderInput';
+export * from './pricingTier';
 export * from './product';
 export * from './productInput';
 export * from './productUpdate';

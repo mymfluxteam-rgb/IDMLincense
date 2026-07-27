@@ -279,6 +279,19 @@ components:
         error:
           type: string
 
+    PricingTier:
+      type: object
+      required: [label, price, discountPercent, discountPrice]
+      properties:
+        label:
+          type: string
+        price:
+          type: number
+        discountPercent:
+          type: integer
+        discountPrice:
+          type: number
+
     Product:
       type: object
       required: [id, name, description, version, price, category, imageUrl, downloadUrl, createdAt, updatedAt]
@@ -299,6 +312,10 @@ components:
           type: ["string", "null"]
         downloadUrl:
           type: string
+        pricingTiers:
+          type: ["array", "null"]
+          items:
+            $ref: "#/components/schemas/PricingTier"
         createdAt:
           type: string
         updatedAt:
@@ -328,6 +345,10 @@ components:
         downloadUrl:
           type: string
           minLength: 1
+        pricingTiers:
+          type: array
+          items:
+            $ref: "#/components/schemas/PricingTier"
 
     ProductUpdate:
       type: object
@@ -348,6 +369,10 @@ components:
           type: string
         downloadUrl:
           type: string
+        pricingTiers:
+          type: array
+          items:
+            $ref: "#/components/schemas/PricingTier"
 
     Order:
       type: object

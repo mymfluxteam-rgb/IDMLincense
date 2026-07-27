@@ -35,6 +35,7 @@ router.get("/products", async (req, res): Promise<void> => {
     ...p,
     price: parseFloat(p.price),
     imageUrl: p.imageUrl ?? null,
+    pricingTiers: p.pricingTiers ?? null,
     createdAt: p.createdAt.toISOString(),
     updatedAt: p.updatedAt.toISOString(),
   }));
@@ -59,6 +60,7 @@ router.post("/products", async (req, res): Promise<void> => {
       category: parsed.data.category,
       imageUrl: parsed.data.imageUrl ?? null,
       downloadUrl: parsed.data.downloadUrl,
+      pricingTiers: parsed.data.pricingTiers ?? null,
     })
     .returning();
 
@@ -67,6 +69,7 @@ router.post("/products", async (req, res): Promise<void> => {
       ...product,
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
+      pricingTiers: product.pricingTiers ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })
@@ -95,6 +98,7 @@ router.get("/products/:id", async (req, res): Promise<void> => {
       ...product,
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
+      pricingTiers: product.pricingTiers ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })
@@ -122,6 +126,7 @@ router.patch("/products/:id", async (req, res): Promise<void> => {
   if (parsed.data.category !== undefined) updates.category = parsed.data.category;
   if (parsed.data.imageUrl !== undefined) updates.imageUrl = parsed.data.imageUrl;
   if (parsed.data.downloadUrl !== undefined) updates.downloadUrl = parsed.data.downloadUrl;
+  if (parsed.data.pricingTiers !== undefined) updates.pricingTiers = parsed.data.pricingTiers;
 
   const [product] = await db
     .update(productsTable)
@@ -139,6 +144,7 @@ router.patch("/products/:id", async (req, res): Promise<void> => {
       ...product,
       price: parseFloat(product.price),
       imageUrl: product.imageUrl ?? null,
+      pricingTiers: product.pricingTiers ?? null,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString(),
     })

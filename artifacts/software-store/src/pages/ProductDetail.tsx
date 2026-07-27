@@ -3,7 +3,7 @@ import { useGetProduct, getGetProductQueryKey } from '@workspace/api-client-reac
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, ArrowLeft, DownloadCloud, ExternalLink } from 'lucide-react';
+import { Loader2, ArrowLeft, DownloadCloud, ExternalLink, Tag } from 'lucide-react';
 
 export default function ProductDetail() {
   const [, params] = useRoute('/products/:id');
@@ -39,6 +39,8 @@ export default function ProductDetail() {
       </div>
     );
   }
+
+  const hasTiers = product.pricingTiers && product.pricingTiers.length > 0;
 
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -106,31 +108,65 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* Download Column */}
-        <div className="lg:col-span-2 sticky top-24">
+        {/* Download / Pricing Column */}
+        <div className="lg:col-span-2 sticky top-24 space-y-4">
           <Card className="shadow-lg border-primary/10">
             <CardHeader className="bg-muted/30 border-b">
-              <div className="flex justify-between items-center">
-                <CardTitle className="text-2xl">Download</CardTitle>
-                <div className="text-2xl font-bold text-primary">{formattedPrice}</div>
-              </div>
+              <CardTitle className="text-2xl">Pricing &amp; Download</CardTitle>
             </CardHeader>
-            <CardContent className="pt-6 space-y-3">
-              <Button
-                asChild
-                className="w-full h-12 text-base font-semibold shadow-md"
-              >
-                <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
-                  <DownloadCloud className="mr-2 h-5 w-5" />
-                  Download {product.name}
-                </a>
-              </Button>
-              <Button asChild variant="outline" className="w-full">
-                <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Open Official Page
-                </a>
-              </Button>
+            <CardContent className="pt-5 space-y-4">
+
+              {hasTiers ? (
+                /* Tiered pricing rows */
+                <div className="space-y-3">
+                  {product.pricingTiers!.map((tier) => {
+                    const regular = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(tier.price);
+                    const discounted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(tier.discountPrice);
+                    return (
+                      <div
+                        key={tier.label}
+                        className="rounded-lg border bg-card p-4 flex flex-col gap-1"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-sm">{tier.label}</span>
+                          <Badge variant="destructive" className="text-xs gap-1">
+                            <Tag className="h-3 w-3" />
+                            {tier.discountPercent}% OFF
+                          </Badge>
+                        </div>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-2xl font-bold text-primary">{discounted}</span>
+                          <span className="text-sm text-muted-foreground line-through">{regular}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                /* Flat price fallback */
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-bold text-primary">{formattedPrice}</span>
+                </div>
+              )}
+
+              <div className="pt-1 space-y-2">
+                <Button
+                  asChild
+                  className="w-full h-12 text-base font-semibold shadow-md"
+                >
+                  <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
+                    <DownloadCloud className="mr-2 h-5 w-5" />
+                    Download {product.name}
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="w-full">
+                  <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    Open Official Page
+                  </a>
+                </Button>
+              </div>
+
             </CardContent>
           </Card>
         </div>

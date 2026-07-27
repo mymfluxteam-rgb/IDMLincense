@@ -33,6 +33,12 @@ export const ListProductsResponseItem = zod.object({
   "category": zod.string(),
   "imageUrl": zod.string().nullable(),
   "downloadUrl": zod.string(),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -58,7 +64,13 @@ export const CreateProductBody = zod.object({
   "price": zod.number().min(createProductBodyPriceMin),
   "category": zod.string().min(1),
   "imageUrl": zod.string().optional(),
-  "downloadUrl": zod.string().min(1)
+  "downloadUrl": zod.string().min(1),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).optional()
 })
 
 export const CreateProductResponse = zod.object({
@@ -70,6 +82,12 @@ export const CreateProductResponse = zod.object({
   "category": zod.string(),
   "imageUrl": zod.string().nullable(),
   "downloadUrl": zod.string(),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -91,6 +109,12 @@ export const GetProductResponse = zod.object({
   "category": zod.string(),
   "imageUrl": zod.string().nullable(),
   "downloadUrl": zod.string(),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -115,7 +139,13 @@ export const UpdateProductBody = zod.object({
   "price": zod.number().min(updateProductBodyPriceMin).optional(),
   "category": zod.string().optional(),
   "imageUrl": zod.string().optional(),
-  "downloadUrl": zod.string().optional()
+  "downloadUrl": zod.string().optional(),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).optional()
 })
 
 export const UpdateProductResponse = zod.object({
@@ -127,6 +157,12 @@ export const UpdateProductResponse = zod.object({
   "category": zod.string(),
   "imageUrl": zod.string().nullable(),
   "downloadUrl": zod.string(),
+  "pricingTiers": zod.array(zod.object({
+  "label": zod.string(),
+  "price": zod.number(),
+  "discountPercent": zod.number(),
+  "discountPrice": zod.number()
+})).nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
