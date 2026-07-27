@@ -189,16 +189,38 @@ export default function Home() {
                     </Button>
                   </div>
                   {'licenseDownloadUrl' in product && (product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl && (
-                    <Button asChild variant="secondary" className="w-full gap-2">
-                      <a
-                        href={(product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <KeyRound className="h-4 w-4 shrink-0" />
-                        {locale === 'my' ? 'လိုင်စင် ဒေါင်းလုပ်' : 'Download Licensed Version'}
-                      </a>
-                    </Button>
+                    <div className="w-full space-y-3">
+                      <Button asChild variant="secondary" className="w-full gap-2">
+                        <a
+                          href={(product as typeof product & { licenseDownloadUrl: string }).licenseDownloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <KeyRound className="h-4 w-4 shrink-0" />
+                          {locale === 'my' ? 'လိုင်စင် ဆော့ဖ်ဝဲ ဒေါင်းလုပ်' : 'License Software Download'}
+                        </a>
+                      </Button>
+                      <ol className="space-y-1.5 text-xs text-muted-foreground pl-1">
+                        <li className="flex gap-2">
+                          <span className="font-bold text-primary shrink-0">1.</span>
+                          {locale === 'my'
+                            ? 'Tool ကို ဒေါင်းလုပ်ဆွဲပြီး ဖွင့်ပါ'
+                            : 'Download the tool and open it'}
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="font-bold text-primary shrink-0">2.</span>
+                          {locale === 'my'
+                            ? 'HWID ကို ကူးယူပြီး မှာယူမှု field တွင် ဖြည့်သွင်းကာ မှတ်ပုံတင်ပါ'
+                            : 'Copy the HWID and fill it in the order field and register'}
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="font-bold text-primary shrink-0">3.</span>
+                          {locale === 'my'
+                            ? 'ထို့နောက် Telegram မှတဆင့် ကျွန်ုပ်တို့ team သို့ ပေးပို့ပါ'
+                            : 'Then send it to our team via Telegram'}
+                        </li>
+                      </ol>
+                    </div>
                   )}
                 </CardFooter>
               </Card>
