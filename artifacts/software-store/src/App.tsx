@@ -2,8 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { useHashLocation } from 'wouter/use-hash-location';
 import NotFound from '@/pages/not-found';
 import { Shell } from '@/components/layout/Shell';
+import { GeoProvider } from '@/context/GeoContext';
 
 // Pages
 import Home from '@/pages/Home';
@@ -13,6 +15,9 @@ import HowToPurchase from '@/pages/HowToPurchase';
 import Contact from '@/pages/Contact';
 
 const queryClient = new QueryClient();
+
+/** Use hash routing for GitHub Pages static hosting; path routing on Replit */
+const USE_HASH = import.meta.env.VITE_USE_HASH_ROUTER === 'true';
 
 function Router() {
   return (
@@ -31,14 +36,22 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <GeoProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          {USE_HASH ? (
+            <WouterRouter hook={useHashLocation}>
+              <Router />
+            </WouterRouter>
+          ) : (
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+              <Router />
+            </WouterRouter>
+          )}
+          <Toaster />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </GeoProvider>
   );
 }
 

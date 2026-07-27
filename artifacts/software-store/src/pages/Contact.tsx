@@ -14,17 +14,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Link } from 'wouter';
-
-const reasons = [
-  'License activation help',
-  'Download / installation issue',
-  'Order & payment inquiry',
-  'License key not received',
-  'Refund request',
-  'General question',
-];
+import { useGeo } from '@/context/GeoContext';
+import { translations } from '@/context/translations';
 
 export default function Contact() {
+  const { locale } = useGeo();
+  const t = translations[locale].contact;
+  const nav = translations[locale].nav;
+
+  const quickHrefs = ['/how-to-purchase', '/pricing', '/order-license'];
+
   const [form, setForm] = useState({ name: '', email: '', reason: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
@@ -37,13 +36,16 @@ export default function Contact() {
     return (
       <div className="container mx-auto px-4 py-20 max-w-lg text-center">
         <CheckCircle className="h-14 w-14 text-green-500 mx-auto mb-4" />
-        <h1 className="text-2xl font-bold mb-2">Message Received!</h1>
-        <p className="text-muted-foreground mb-6 text-sm">
-          Thank you, <strong>{form.name}</strong>. We've received your message and will respond to{' '}
-          <strong>{form.email}</strong> within 24 hours.
-        </p>
-        <Button variant="outline" onClick={() => { setSubmitted(false); setForm({ name: '', email: '', reason: '', message: '' }); }}>
-          Send another message
+        <h1 className="text-2xl font-bold mb-2">{t.successTitle}</h1>
+        <p className="text-muted-foreground mb-6 text-sm">{t.successSub(form.name, form.email)}</p>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setSubmitted(false);
+            setForm({ name: '', email: '', reason: '', message: '' });
+          }}
+        >
+          {t.sendAnother}
         </Button>
       </div>
     );
@@ -53,11 +55,11 @@ export default function Contact() {
     <div className="container mx-auto px-4 py-14 max-w-4xl">
       {/* Header */}
       <div className="text-center mb-10">
-        <Badge variant="outline" className="mb-4 text-xs font-semibold uppercase tracking-wide">We're Here to Help</Badge>
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">Contact Support Team</h1>
-        <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
-          Have a question about licensing, downloads, or activation? Fill out the form below and we'll get back to you within 24 hours.
-        </p>
+        <Badge variant="outline" className="mb-4 text-xs font-semibold uppercase tracking-wide">
+          {t.badge}
+        </Badge>
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">{t.title}</h1>
+        <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">{t.sub}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -66,17 +68,17 @@ export default function Contact() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg">
               <MessageSquare className="h-5 w-5 text-primary" />
-              Send a Message
+              {t.formTitle}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t.nameLabel}</Label>
                   <Input
                     id="name"
-                    placeholder="Your name"
+                    placeholder={t.namePlaceholder}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     required
@@ -84,11 +86,11 @@ export default function Contact() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email">{t.emailLabel}</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder={t.emailPlaceholder}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     required
@@ -98,24 +100,26 @@ export default function Contact() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="reason">Reason for Contact</Label>
+                <Label htmlFor="reason">{t.reasonLabel}</Label>
                 <Select value={form.reason} onValueChange={(v) => setForm({ ...form, reason: v })}>
                   <SelectTrigger id="reason" className="h-11">
-                    <SelectValue placeholder="Select a reason…" />
+                    <SelectValue placeholder={t.reasonPlaceholder} />
                   </SelectTrigger>
                   <SelectContent>
-                    {reasons.map((r) => (
-                      <SelectItem key={r} value={r}>{r}</SelectItem>
+                    {t.reasons.map((r) => (
+                      <SelectItem key={r} value={r}>
+                        {r}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message">{t.messageLabel}</Label>
                 <Textarea
                   id="message"
-                  placeholder="Describe your issue in detail…"
+                  placeholder={t.messagePlaceholder}
                   rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -130,7 +134,7 @@ export default function Contact() {
                 disabled={!form.name || !form.email || !form.message}
               >
                 <Mail className="h-4 w-4" />
-                Send Message
+                {t.submitBtn}
               </Button>
             </form>
           </CardContent>
@@ -141,42 +145,48 @@ export default function Contact() {
           <div className="rounded-lg border bg-muted/30 p-5">
             <div className="flex items-center gap-2 mb-3">
               <Clock className="h-4 w-4 text-blue-500" />
-              <p className="font-semibold text-sm">Response Time</p>
+              <p className="font-semibold text-sm">{t.responseTitle}</p>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We typically respond within <strong>2–24 hours</strong> on business days.
-              For urgent license issues, mention "URGENT" in your message.
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t.responseBody}</p>
           </div>
 
           <div className="rounded-lg border bg-muted/30 p-5">
-            <p className="font-semibold text-sm mb-2">Common Quick Answers</p>
+            <p className="font-semibold text-sm mb-2">{t.quickTitle}</p>
             <ul className="space-y-2 text-xs text-muted-foreground">
-              <li>
-                <Link href="/how-to-purchase" className="text-primary underline underline-offset-2 hover:no-underline">
-                  How do I buy a license?
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="text-primary underline underline-offset-2 hover:no-underline">
-                  What are the prices?
-                </Link>
-              </li>
-              <li>
-                <Link href="/order-license" className="text-primary underline underline-offset-2 hover:no-underline">
-                  I want to order a license now
-                </Link>
-              </li>
+              {t.quickLinks.map((label, i) => (
+                <li key={i}>
+                  <Link
+                    href={quickHrefs[i]}
+                    className="text-primary underline underline-offset-2 hover:no-underline"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="rounded-lg border bg-primary/5 p-5">
             <p className="text-xs text-muted-foreground leading-relaxed">
-              <strong className="text-foreground">Note:</strong> For issues specific to the software itself (bugs,
-              crashes), please also consult the official publisher support pages:{' '}
-              <a href="https://www.internetdownloadmanager.com/support.html" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">IDM Support</a>
-              {' '}or{' '}
-              <a href="https://www.win-rar.com/support.html" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">WinRAR Support</a>.
+              <strong className="text-foreground">{t.noteTitle}</strong> {t.noteBody}{' '}
+              <a
+                href="https://www.internetdownloadmanager.com/support.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2"
+              >
+                IDM Support
+              </a>{' '}
+              {locale === 'my' ? 'သို့မဟုတ်' : 'or'}{' '}
+              <a
+                href="https://www.win-rar.com/support.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2"
+              >
+                WinRAR Support
+              </a>
+              .
             </p>
           </div>
         </div>

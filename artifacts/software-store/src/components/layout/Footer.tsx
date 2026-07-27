@@ -1,26 +1,26 @@
 import { Link } from 'wouter';
 import { Download, ShieldCheck } from 'lucide-react';
-
-const navLinks = [
-  { href: '/', label: 'Download Software' },
-  { href: '/order-license', label: 'Order License' },
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/how-to-purchase', label: 'How to Purchase License' },
-  { href: '/contact', label: 'Contact Support Team' },
-];
-
-const officialLinks = [
-  { href: 'https://www.internetdownloadmanager.com', label: 'IDM Official Site' },
-  { href: 'https://www.win-rar.com', label: 'WinRAR Official Site' },
-];
-
-const legalLinks = [
-  { href: '#', label: 'Terms of Service' },
-  { href: '#', label: 'Privacy Policy' },
-  { href: '#', label: 'Refund Policy' },
-];
+import { useGeo } from '@/context/GeoContext';
+import { translations } from '@/context/translations';
 
 export function Footer() {
+  const { locale } = useGeo();
+  const t = translations[locale].footer;
+  const nav = translations[locale].nav;
+
+  const navLinks = [
+    { href: '/', label: nav.download },
+    { href: '/order-license', label: nav.orderLicense },
+    { href: '/pricing', label: nav.pricing },
+    { href: '/how-to-purchase', label: nav.howToPurchase },
+    { href: '/contact', label: nav.contact },
+  ];
+
+  const officialLinks = [
+    { href: 'https://www.internetdownloadmanager.com', label: 'IDM Official Site' },
+    { href: 'https://www.win-rar.com', label: 'WinRAR Official Site' },
+  ];
+
   return (
     <footer className="border-t bg-muted/40 mt-auto">
       <div className="container mx-auto px-4 py-10 md:py-14 max-w-7xl">
@@ -31,20 +31,18 @@ export function Footer() {
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Download className="h-4 w-4" />
               </div>
-              <span className="font-bold tracking-tight">SoftStore</span>
+              <span className="font-bold tracking-tight">{translations[locale].brand}</span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Official software downloads and genuine licensing for IDM and WinRAR. Instant delivery, verified sources.
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">{t.tagline}</p>
             <div className="flex items-center gap-1.5 mt-4 text-xs text-green-600 font-medium">
               <ShieldCheck className="h-3.5 w-3.5" />
-              Official sources only
+              {t.officialOnly}
             </div>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Navigation</h3>
+            <h3 className="font-semibold mb-4 text-sm">{t.navTitle}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {navLinks.map(({ href, label }) => (
                 <li key={href}>
@@ -58,16 +56,11 @@ export function Footer() {
 
           {/* Official Sites */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Official Publisher Sites</h3>
+            <h3 className="font-semibold mb-4 text-sm">{t.officialTitle}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {officialLinks.map(({ href, label }) => (
                 <li key={href}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-primary transition-colors"
-                  >
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                     {label} ↗
                   </a>
                 </li>
@@ -77,13 +70,11 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm">Legal</h3>
+            <h3 className="font-semibold mb-4 text-sm">{t.legalTitle}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              {legalLinks.map(({ href, label }) => (
+              {t.legal.map((label) => (
                 <li key={label}>
-                  <a href={href} className="hover:text-primary transition-colors">
-                    {label}
-                  </a>
+                  <a href="#" className="hover:text-primary transition-colors">{label}</a>
                 </li>
               ))}
             </ul>
@@ -91,13 +82,9 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
-          <span>&copy; {new Date().getFullYear()} SoftStore. All rights reserved.</span>
-          <span>
-            All software is property of their respective publishers.{' '}
-            <a href="https://www.internetdownloadmanager.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">IDM</a>
-            {' & '}
-            <a href="https://www.win-rar.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">WinRAR</a>
-            {' are registered trademarks.'}
+          <span>{t.copyright(new Date().getFullYear())}</span>
+          <span className="text-center">
+            {t.trademark}
           </span>
         </div>
       </div>
