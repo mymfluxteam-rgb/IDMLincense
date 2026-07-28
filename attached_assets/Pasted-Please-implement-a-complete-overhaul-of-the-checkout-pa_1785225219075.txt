@@ -1,0 +1,32 @@
+Please implement a complete overhaul of the checkout, payment, and download sections with the following specifications:
+
+1. Navigation & Button Links:
+   - When users click "Buy License" anywhere on the website, redirect them directly to the "Order License" page.
+
+2. Software Download Section (IDM & WinRAR & License Software):
+   - Simplify the download buttons on IDM and WinRAR cards into a single unified button displaying a Windows logo with text "64-bit & 32-bit" (do not split them).
+   - In the "License Software Download" section at the bottom, provide a single clean unified Mega download link/button for "64-bit & 32-bit (Mega)".
+
+3. Payment Method Selection (Before Proceed to Purchase):
+   - Add a payment method selector on the checkout/order page allowing users to choose between:
+     * Myanmar Payment Methods
+     * International Payment Methods
+
+4. Myanmar Payment Flow & QR Modal:
+   - Display KBZ Pay (Number: 09686022905) and WaveMoney (Number: 09771180852) clearly with copy buttons.
+   - Include a "Show QR Code" toggle/button for each. When clicked, open a clean, centered full-screen modal displaying a high-resolution, large QR code for easy scanning.
+   - If the user selects "Myanmar Payment Methods" and clicks "Proceed to Purchase", format all customer form inputs into a clean structured text message and immediately open/redirect to Telegram so the user can send it directly.
+
+5. International Payment Methods & Crypto Addresses:
+   - If the user selects "International Payment Methods", display the following official cryptocurrency addresses clearly:
+     * BTC Address: bc1qff7tyhcxemcw643d9lmseu3txwpx8347z4d9uh
+     * USDT (BEP-20) Address: 0x71A0Bd652DCD54B404Ac8E7D80743692CdCc190a
+     * USDT (TRC-20) Address: 0x71A0Bd652DCD54B404Ac8E7D80743692CdCc190a
+     * USDT (ERC-20) Address: 0x71A0Bd652DCD54B404Ac8E7D80743692CdCc190a
+
+6. Trust Wallet API & Environment Variables:
+   - Configure Trust Wallet API credentials (Access ID and HMAC) to be securely read from environment variables / GitHub Secrets/Variables.
+   - Integrate Trust Wallet API so users can connect and transfer directly via mobile app after choosing an address.
+   - Implement an auto-detection mechanism to verify the transaction based on form inputs, and automatically trigger Telegram to complete the purchase upon success.
+
+telegram link: https://t.me/NetCodeShop
