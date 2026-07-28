@@ -224,7 +224,7 @@ export const translations = {
       navTitle: 'Navigation',
       officialTitle: 'Official Publisher Sites',
       legalTitle: 'Legal',
-      legal: ['Terms of Service', 'Privacy Policy'],
+      legal: ['Terms of Service'],
       copyright: (year: number) => `© ${year} SoftStore. All rights reserved.`,
       trademark: 'All software is property of their respective publishers. IDM & WinRAR are registered trademarks.',
     },
@@ -319,6 +319,73 @@ export const translations = {
       s11Title: '11. Contact Us',
       s11Intro: 'If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:',
       s11EmailLabel: 'Email:',
+    },
+
+    termsOfService: {
+      badge: 'Legal',
+      title: 'Terms of Service',
+      lastUpdatedLabel: 'Last updated:',
+      lastUpdatedDate: 'July 27, 2025',
+      intro: 'Please read these Terms of Service ("Terms") carefully before using the SoftStore website (the "Service"). By accessing or using our Service, you agree to be bound by these Terms. If you do not agree, please discontinue use of the Service.',
+
+      s1Title: '1. Acceptance of Terms',
+      s1Body: 'By accessing or using SoftStore, you confirm that you are at least 18 years of age, have read and understood these Terms, and agree to be bound by them. If you are using the Service on behalf of a business or organization, you represent that you have authority to bind that entity to these Terms.',
+
+      s2Title: '2. About Our Service',
+      s2Body: 'SoftStore facilitates the purchase and delivery of genuine software license keys for products including Internet Download Manager (IDM) and WinRAR. We act as an authorized reseller and order facilitator. All software products remain the intellectual property of their respective publishers. Completing a purchase through SoftStore grants you a license from the official publisher — it does not transfer ownership of the software.',
+
+      s3Title: '3. Pricing & Payment',
+      s3Intro: 'All prices displayed on the website are in US Dollars (USD) unless otherwise indicated. Burmese Kyat (MMK) pricing shown is for reference only, based on an approximate display rate. By placing an order, you agree to the following:',
+      s3Items: [
+        'Prices are subject to change without prior notice.',
+        'Payment must be completed in full before a license key is issued.',
+        'We reserve the right to cancel any order we are unable to fulfill.',
+        'You are responsible for any applicable taxes or fees imposed by your local jurisdiction.',
+      ],
+
+      s4Title: '4. Order Process',
+      s4Intro: 'Our order process works as follows:',
+      s4Steps: [
+        'Submit your order via the Order License page with your email address and Hardware ID (HWID).',
+        'Our team verifies your request and confirms availability.',
+        'You complete payment via the method agreed upon with our support team.',
+        'Upon payment confirmation, your license key is delivered to your registered email address.',
+      ],
+
+      s5Title: '5. License Key Delivery',
+      s5Body: 'License keys are typically delivered within minutes to a few hours of confirmed payment, depending on verification requirements. Keys are sent to the email address provided at the time of order. Please check your spam or junk folder if you do not receive your key within the expected time. SoftStore is not responsible for delivery failures caused by incorrect email addresses provided by the customer.',
+
+      s6Title: '6. All Sales Are Final',
+      s6Body: 'Due to the digital and non-returnable nature of software license keys, all sales are final. Once a license key has been delivered to your email address, no refund or exchange will be provided. If you believe there is an error with your key (e.g., the key does not activate), please contact our support team within 48 hours of delivery and we will investigate and provide a resolution.',
+
+      s7Title: '7. Intellectual Property',
+      s7Body: 'All software products available through SoftStore are the intellectual property of their respective publishers — Tonec Inc. (Internet Download Manager) and win.rar GmbH (WinRAR). The SoftStore name, logo, and website content are owned by SoftStore. You may not copy, reproduce, distribute, or create derivative works from any content on this website without prior written permission.',
+
+      s8Title: '8. Acceptable Use',
+      s8Intro: 'When using our Service, you agree that you will not:',
+      s8Items: [
+        'Resell, redistribute, or transfer any license key purchased through SoftStore to a third party.',
+        'Attempt to use a single license key on more than the permitted number of devices.',
+        'Provide false or misleading information when placing an order.',
+        'Use the Service for any unlawful, fraudulent, or harmful purpose.',
+        'Attempt to gain unauthorized access to our systems or disrupt the Service.',
+      ],
+
+      s9Title: '9. Disclaimer of Warranties',
+      s9Body: 'The Service is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. SoftStore does not warrant that the Service will be uninterrupted, error-free, or free of viruses or other harmful components. Your use of the Service is at your sole risk.',
+
+      s10Title: '10. Limitation of Liability',
+      s10Body: 'To the maximum extent permitted by applicable law, SoftStore and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service. In any event, our total liability to you for any claim arising out of or relating to these Terms or the Service shall not exceed the amount you paid for the transaction giving rise to the claim.',
+
+      s11Title: '11. Changes to These Terms',
+      s11Body: 'We reserve the right to modify these Terms at any time. When we make changes, we will update the "Last updated" date at the top of this page. Your continued use of the Service after changes are posted constitutes your acceptance of the revised Terms. We encourage you to review these Terms periodically.',
+
+      s12Title: '12. Governing Law',
+      s12Body: 'These Terms shall be governed by and construed in accordance with applicable laws. Any disputes arising from these Terms or the Service shall be resolved through good-faith negotiation. If a dispute cannot be resolved through negotiation, it shall be submitted to the appropriate courts of competent jurisdiction.',
+
+      s13Title: '13. Contact Us',
+      s13Intro: 'If you have any questions or concerns about these Terms of Service, please contact us:',
+      s13EmailLabel: 'Email:',
     },
 
     langLabel: 'Language',
@@ -537,7 +604,7 @@ export const translations = {
       navTitle: 'လမ်းညွှန်',
       officialTitle: 'တရားဝင် ထုတ်ဝေသူ ဆိုဒ်များ',
       legalTitle: 'ဥပဒေရေးရာ',
-      legal: ['ဝန်ဆောင်မှု စည်းကမ်းချက်', 'ကိုယ်ရေးကိုယ်တာ မူဝါဒ'],
+      legal: ['ဝန်ဆောင်မှု စည်းကမ်းချက်'],
       copyright: (year: number) => `© ${year} SoftStore။ မူပိုင်ခွင့် အားလုံး ရယူထားသည်။`,
       trademark: 'ဆော့ဖ်ဝဲများအားလုံးသည် မိမိဆိုင်ရာ ထုတ်ဝေသူများ၏ ပစ္စည်းများဖြစ်သည်။ IDM & WinRAR သည် မှတ်ပုံတင်ထားသော ကုန်အမှတ်တံဆိပ်များ ဖြစ်သည်။',
     },
@@ -632,6 +699,73 @@ export const translations = {
       s11Title: '၁၁။ ဆက်သွယ်ရန်',
       s11Intro: 'ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒနှင့် ပတ်သက်ပြီး မေးခွန်း၊ စိုးရိမ်ချက် သို့မဟုတ် တောင်းဆိုမှုများ ရှိပါက ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ:',
       s11EmailLabel: 'အီးမေးလ်:',
+    },
+
+    termsOfService: {
+      badge: 'ဥပဒေရေးရာ',
+      title: 'ဝန်ဆောင်မှု စည်းကမ်းချက်များ',
+      lastUpdatedLabel: 'နောက်ဆုံး ပြင်ဆင်သည့် နေ့:',
+      lastUpdatedDate: 'ဇူလိုင် ၂၇၊ ၂၀၂၅',
+      intro: 'SoftStore ဝဘ်ဆိုဒ် ("ဝန်ဆောင်မှု") ကို အသုံးပြုမတိုင်မှီ ဤ ဝန်ဆောင်မှု စည်းကမ်းချက်များ ("စည်းကမ်းများ") ကို ဂရုတစိုက် ဖတ်ပါ။ ဝန်ဆောင်မှုကို ဝင်ရောက်ခြင်း သို့မဟုတ် အသုံးပြုခြင်းဖြင့် ဤ စည်းကမ်းများကို လိုက်နာရန် သဘောတူသည်ဟု မှတ်ယူသည်။ သဘောမတူပါက ဝန်ဆောင်မှု အသုံးပြုခြင်းကို ရပ်တန့်ပါ။',
+
+      s1Title: '၁။ စည်းကမ်းများ လက်ခံခြင်း',
+      s1Body: 'SoftStore ကို ဝင်ရောက်ခြင်း သို့မဟုတ် အသုံးပြုခြင်းဖြင့် သင်သည် အသက် ၁၈ နှစ် ပြည့်ပြီးဖြစ်သည်၊ ဤ စည်းကမ်းများကို ဖတ်ရှုနားလည်ပြီး၊ ၎င်းတို့ကို လိုက်နာရန် သဘောတူသည်ဟု အတည်ပြုသည်။ အဖွဲ့အစည်းတစ်ခုကိုယ်စား ဝန်ဆောင်မှုကို သုံးစွဲပါက ထိုအဖွဲ့အစည်းကို ဤ စည်းကမ်းများနှင့် ချည်နှောင်ရန် အာဏာရှိကြောင်း ကိုယ်စားပြုကြောင်း ဖော်ပြသည်။',
+
+      s2Title: '၂။ ကျွန်ုပ်တို့ ဝန်ဆောင်မှုအကြောင်း',
+      s2Body: 'SoftStore သည် Internet Download Manager (IDM) နှင့် WinRAR အပါအဝင် ဆော့ဖ်ဝဲ ထုတ်ကုန်များအတွက် တရားဝင် ဆော့ဖ်ဝဲ လိုင်စင်သော့များ ဝယ်ယူမှုနှင့် ပေးပို့မှုကို ဆောင်ရွက်ပေးသည်။ ကျွန်ုပ်တို့သည် တရားဝင် ပြန်လည်ရောင်းချသူ နှင့် မှာယူမှု ဆောင်ရွက်ပေးသူအဖြစ် ဆောင်ရွက်သည်။ ဆော့ဖ်ဝဲ ထုတ်ကုန်များ အားလုံးသည် မိမိ ဆိုင်ရာ ထုတ်ဝေသူများ၏ မူပိုင်ဆိုင်မှု ဖြစ်သည်။ SoftStore မှ ဝယ်ယူမှု ပြီးစီးသောအခါ တရားဝင် ထုတ်ဝေသူထံမှ လိုင်စင် ရရှိမည် ဖြစ်ပြီး ဆော့ဖ်ဝဲ ပိုင်ဆိုင်မှုကို လွှဲပြောင်းမည် မဟုတ်ပေ။',
+
+      s3Title: '၃။ စျေးနှုန်း နှင့် ငွေပေးချေမှု',
+      s3Intro: 'ဝဘ်ဆိုဒ်တွင် ပြသသော စျေးနှုန်းများ အားလုံးသည် အမေရိကန် ဒေါ်လာ (USD) ဖြင့် ဖော်ပြသည် (အခြားနည်း သတ်မှတ်မထားပါက)။ ပြသသော မြန်မာ ကျပ် (MMK) စျေးနှုန်းသည် ကြည့်ရှုရန်သာ ဖြစ်ပြီး ခန့်မှန်းသော နှုန်းကို အသုံးပြုသည်။ မှာယူမှု ပြုလုပ်ခြင်းဖြင့် အောက်ပါ သဘောတူညီချက်များ လက်ခံသည်:',
+      s3Items: [
+        'စျေးနှုန်းများ ကြိုတင် အကြောင်းကြားမှု မပါဘဲ ပြောင်းလဲနိုင်သည်။',
+        'လိုင်စင်သော့ ထုတ်ပေးမတိုင်မှီ ငွေပေးချေမှု အပြည့်အဝ ပြုလုပ်ရမည်။',
+        'ဖြည့်ဆည်းနိုင်မည် မဟုတ်သော မည်သည့် မှာယူမှုကိုမဆို ပယ်ဖျက်ပိုင်ခွင့် ကျွန်ုပ်တို့တွင် ရှိသည်။',
+        'သင်၏ ဒေသဆိုင်ရာ အာဏာပိုင်များ သတ်မှတ်သော မည်သည့် အခွန် သို့မဟုတ် ကြေးနက်ကိုမဆို သင် ကိုယ်တိုင် တာဝန်ယူရသည်။',
+      ],
+
+      s4Title: '၄။ မှာယူမှု လုပ်ငန်းစဉ်',
+      s4Intro: 'ကျွန်ုပ်တို့ မှာယူမှု လုပ်ငန်းစဉ် အောက်ပါအတိုင်း ဆောင်ရွက်သည်:',
+      s4Steps: [
+        'Order License စာမျက်နှာမှ သင့် အီးမေးလ် လိပ်စာ နှင့် Hardware ID (HWID) ဖြင့် မှာယူမှု တင်ပါ။',
+        'ကျွန်ုပ်တို့ အဖွဲ့သည် သင့် တောင်းဆိုမှုကို စစ်ဆေးပြီး ရနိုင်မှုကို အတည်ပြုသည်။',
+        'ပံ့ပိုးရေး အဖွဲ့နှင့် သဘောတူသည့် နည်းလမ်းဖြင့် ငွေပေးချေမှု ပြုလုပ်သည်။',
+        'ငွေပေးချေမှု အတည်ပြုပြီးနောက် မှတ်ပုံတင်ထားသော အီးမေးလ် လိပ်စာသို့ လိုင်စင်သော့ ပေးပို့သည်။',
+      ],
+
+      s5Title: '၅။ လိုင်စင်သော့ ပေးပို့မှု',
+      s5Body: 'လိုင်စင်သော့များကို ငွေပေးချေမှု အတည်ပြုပြီးနောက် စစ်ဆေးမှု လိုအပ်ချက်ပေါ် မူတည်၍ ပုံမှန်အားဖြင့် မိနစ်ပိုင်းမှ နာရီအနည်းငယ်အတွင်း ပေးပို့သည်။ မှာယူချိန်တွင် ပေးထားသော အီးမေးလ် လိပ်စာသို့ သော့ ပေးပို့သည်။ မျှော်မှန်းသည့် အချိန်အတွင်း မရောက်ပါက spam သို့မဟုတ် junk folder စစ်ဆေးပါ။ ဖောက်သည်က အမှားအယွင်း အီးမေးလ် လိပ်စာ ပေးသောကြောင့် ပေးပို့မှု မအောင်မြင်ပါက SoftStore တာဝန်မယူပေ။',
+
+      s6Title: '၆။ ရောင်းပြီးသော ကုန်ပစ္စည်း ပြန်မလဲပေ',
+      s6Body: 'ဆော့ဖ်ဝဲ လိုင်စင်သော့များ၏ ဒစ်ဂျစ်တယ် သဘောသဘာဝ နှင့် ပြန်မပေးနိုင်သည့် သဘောကြောင့် ရောင်းချပြီးသော ကုန်ပစ္စည်းများ ငွေပြန်မအမ်းပေ။ လိုင်စင်သော့ သင့် အီးမေးလ်သို့ ရောက်ပြီးနောက် ငွေပြန်အမ်းမှု သို့မဟုတ် လဲလှယ်မှု မပြုပေ။ သော့ ပြဿနာ ရှိသည်ဟု ယူဆပါက (ဥပမာ — သော့ မအသက်မသွင်းနိုင်ပါက) ပေးပို့ပြီး ၄၈ နာရီအတွင်း ပံ့ပိုးရေး အဖွဲ့ကို ဆက်သွယ်ပါ — ကျွန်ုပ်တို့ စုံစမ်းစစ်ဆေးပြီး ဖြေရှင်းချက် ပေးမည်။',
+
+      s7Title: '၇။ မူပိုင်ဆိုင်မှု',
+      s7Body: 'SoftStore မှတဆင့် ရနိုင်သော ဆော့ဖ်ဝဲ ထုတ်ကုန်များ အားလုံးသည် မိမိ ဆိုင်ရာ ထုတ်ဝေသူများ — Tonec Inc. (Internet Download Manager) နှင့် win.rar GmbH (WinRAR) — တို့၏ မူပိုင်ဆိုင်မှု ဖြစ်သည်။ SoftStore အမည်၊ လိုဂို နှင့် ဝဘ်ဆိုဒ် အကြောင်းအရာများသည် SoftStore ပိုင်ဆိုင်သည်။ ကြိုတင် စာဖြင့် ခွင့်ပြုချက်မရဘဲ ဝဘ်ဆိုဒ်ပေါ်မှ မည်သည့် အကြောင်းအရာကိုမဆို ကူးယူ၊ ပြန်လည်ထုတ်ဝေ၊ ဖြန့်ဝေ သို့မဟုတ် ဆင်ပြားဖန်တီးမှုများ ပြုလုပ်ခြင်း မပြုနိုင်ပေ။',
+
+      s8Title: '၈။ ခွင့်ပြုနိုင်သော အသုံးပြုမှု',
+      s8Intro: 'ဝန်ဆောင်မှုကို အသုံးပြုသောအခါ အောက်ပါ အရာများ မပြုလုပ်ရန် သဘောတူသည်:',
+      s8Items: [
+        'SoftStore မှ ဝယ်ယူသော လိုင်စင်သော့ကို တတိယ ပါတီသို့ ပြန်ရောင်းခြင်း၊ ဖြန့်ဝေခြင်း သို့မဟုတ် လွှဲပြောင်းခြင်း။',
+        'ခွင့်ပြုသည့် ကိရိယာ အရေအတွက်ထက် ပိုသော ကိရိယာများတွင် လိုင်စင်သော့တစ်ခုတည်း သုံးရန် ကြိုးစားခြင်း။',
+        'မှာယူမှု ပြုလုပ်ရာတွင် မှားယွင်းသော သို့မဟုတ် လှည့်ဖြားသော သတင်းအချက်အလက် ပေးခြင်း။',
+        'ဥပဒေမဲ့၊ လိမ်လည်မှု ဆိုင်ရာ သို့မဟုတ် အန္တရာယ်ဖြစ်စေသော ရည်ရွယ်ချက်ဖြင့် ဝန်ဆောင်မှု သုံးစွဲခြင်း။',
+        'ကျွန်ုပ်တို့ စနစ်သို့ ခွင့်မပြုဘဲ ဝင်ရောက်ရန် ကြိုးစားခြင်း သို့မဟုတ် ဝန်ဆောင်မှုကို နှောင့်ယှက်ခြင်း။',
+      ],
+
+      s9Title: '၉။ အာမခံချက် ငြင်းဆန်ခြင်း',
+      s9Body: 'ဝန်ဆောင်မှုကို ကုန်သွယ်မှုဆိုင်ရာ အကောင်းဆုံး ကိုယ်ခံပြင်ဆင်မှု၊ သတ်မှတ် ရည်ရွယ်ချက်အတွက် သင့်လျော်မှု နှင့် ချိုးဖောက်မှု ကင်းစင်မှု ကဲ့သို့သော ကြိုတင်ကတိ တိပ်တ ကြောင်ကြောင် ကောင်ကောင် မပေးသော "အရင်းတိုင်းပင်" နှင့် "ရနိုင်သမျှ" အခြေခံဖြင့် ပေးသည်။ ဝန်ဆောင်မှု အနှောင့်အယှက်မရှိ၊ အမှားအယွင်းကင်း သို့မဟုတ် ဗိုင်းရပ်စ် ကင်းမဲ့မည်ဟု SoftStore အာမခံမည် မဟုတ်ပေ။ ဝန်ဆောင်မှု အသုံးပြုမှုသည် သင့် ကိုယ်တိုင် တာဝန် ယူရသည်။',
+
+      s10Title: '၁၀။ တာဝန်ယူမှု ကန့်သတ်ချက်',
+      s10Body: 'သက်ဆိုင်ရာ ဥပဒေ ခွင့်ပြုသည့် အများဆုံး အတိုင်းအတာ၊ SoftStore နှင့် ၎င်း၏ လုပ်ကိုင်သူများသည် ဝန်ဆောင်မှု သုံးစွဲမှုမှ ဖြစ်ပေါ်သော မည်သည့် သွယ်ဝိုက်သော၊ ကျပန်းဖြစ်ပေါ်သော၊ အထူး၊ ဆက်နွှယ်သော သို့မဟုတ် ပြစ်ဒဏ်ဆိုင်ရာ ထိခိုက်ဆုံးရှုံးမှုအတွက် တာဝန်မခံပေ။ မည်သည့် ကိစ္စမဆိုတွင် ကျွန်ုပ်တို့ တာဝန်ဆောင်မှုသည် ကိစ္စကို ဖြစ်ပေါ်စေသော မှာယူမှုအတွက် သင် ပေးချေသော ပမာဏကိုသာ မကျော်လွန်ပေ။',
+
+      s11Title: '၁၁။ ဤ စည်းကမ်းများ ပြောင်းလဲမှု',
+      s11Body: 'ဤ စည်းကမ်းများကို မည်သည့် အချိန်မဆို ပြင်ဆင်ပိုင်ခွင့် ကျွန်ုပ်တို့တွင် ရှိသည်။ ပြောင်းလဲမှု ပြုလုပ်သောအခါ ဤ စာမျက်နှာ ထိပ်ရှိ "နောက်ဆုံး ပြင်ဆင်သည့် နေ့" ကို ပြင်ဆင်မည်။ ပြောင်းလဲမှုများ တင်ပြပြီးနောက် ဝန်ဆောင်မှု ဆက်လက် သုံးစွဲသောအခါ ပြင်ဆင်ပြောင်းလဲသည့် စည်းကမ်းများကို လက်ခံသည်ဟု မှတ်ယူသည်။ ဤ စည်းကမ်းများကို ကာလအားလျော်စွာ ပြန်လည် ဖတ်ရှုရန် တိုက်တွန်းသည်။',
+
+      s12Title: '၁၂။ အုပ်ချုပ်မှု ဥပဒေ',
+      s12Body: 'ဤ စည်းကမ်းများကို သက်ဆိုင်ရာ ဥပဒေများ အရ အုပ်ချုပ်ပြီး ဆောင်ရွက်မည်။ ဤ စည်းကမ်းများ သို့မဟုတ် ဝန်ဆောင်မှုမှ ဖြစ်ပေါ်သော အငြင်းပွားမှုများကို ကောင်းမွန်သော ရည်ရွယ်ချက်ဖြင့် ညှိနှိုင်းဆွေးနွေးခြင်းမှတဆင့် ဖြေရှင်းမည်။ ညှိနှိုင်းဖြေရှင်းနိုင်မပါက သင့်လျော်သည့် တရားစီရင်ပိုင်ခွင့်ရှိသော တရားရုံးသို့ တင်ပြမည်။',
+
+      s13Title: '၁၃။ ဆက်သွယ်ရန်',
+      s13Intro: 'ဤ ဝန်ဆောင်မှု စည်းကမ်းချက်များနှင့် ပတ်သက်ပြီး မေးခွန်း သို့မဟုတ် စိုးရိမ်ချက်များ ရှိပါက ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ:',
+      s13EmailLabel: 'အီးမေးလ်:',
     },
 
     langLabel: 'ဘာသာစကား',
