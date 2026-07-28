@@ -207,8 +207,9 @@ export const translations = {
         'What are the prices?',
         'I want to order a license now',
       ],
-      noteTitle: 'Note:',
-      noteBody: 'For issues specific to the software itself (bugs, crashes), please also consult the official publisher support pages:',
+      noteTitle: 'Need faster help?',
+      noteBody: 'For any issue — license activation, bugs, crashes, or anything else — reach our support team directly on Telegram for the fastest response:',
+      telegramLabel: 'Chat with us on Telegram',
       reasons: [
         'License activation help',
         'Download / installation issue',
@@ -587,8 +588,9 @@ export const translations = {
         'စျေးနှုန်းများ ဘယ်လောက်ကျ?',
         'လိုင်စင် ဇာတ်မှာ မှာယူချင်သည်',
       ],
-      noteTitle: 'မှတ်ချက်:',
-      noteBody: 'ဆော့ဖ်ဝဲကိုယ်တိုင်နှင့် ပတ်သက်သော ပြဿနာများ (bug၊ crash) အတွက် တရားဝင် ထုတ်ဝေသူ ပံ့ပိုးရေး စာမျက်နှာများကိုပါ ဆက်သွယ်ပါ:',
+      noteTitle: 'ပိုမြန်သော ကူညီမှု လိုသလား?',
+      noteBody: 'မည်သည့် ပြဿနာမဆို — လိုင်စင် အသက်သွင်း၊ bug၊ crash သို့မဟုတ် အခြားကိစ္စများ — Telegram မှ ကျွန်ုပ်တို့ ပံ့ပိုးရေးအဖွဲ့ကို တိုက်ရိုက် ဆက်သွယ်ပါ:',
+      telegramLabel: 'Telegram တွင် ဆက်သွယ်မည်',
       reasons: [
         'လိုင်စင် အသက်သွင်းရန် ကူညီမှု',
         'ဒေါင်းလုပ် / ထည့်သွင်းခြင်း ပြဿနာ',
