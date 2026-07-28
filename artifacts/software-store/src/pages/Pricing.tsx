@@ -1,4 +1,4 @@
-import { Check, ExternalLink, HelpCircle, Tag } from 'lucide-react';
+import { Check, HelpCircle, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -136,9 +136,9 @@ export default function Pricing() {
 
               <CardFooter className="flex flex-col gap-2 pt-4 border-t">
                 <Button asChild className="w-full gap-2">
-                  <a href={t.buyUrlIdm} target="_blank" rel="noopener noreferrer">
-                    {t.buyBtn(discountedDisplay)} <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+                  <Link href="/order-license">
+                    {t.buyBtn(discountedDisplay)}
+                  </Link>
                 </Button>
                 <Button asChild variant="ghost" size="sm" className="w-full text-muted-foreground">
                   <a href={t.trialUrlIdm} target="_blank" rel="noopener noreferrer">

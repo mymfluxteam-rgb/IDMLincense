@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShieldCheck, Clock, Mail, KeyRound } from 'lucide-react';
+import { ShieldCheck, Clock, Mail, KeyRound, QrCode, Copy, Check as CheckIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -41,6 +41,17 @@ export default function OrderLicense() {
   const [email,       setEmail]       = useState('');
   const [hwid,        setHwid]        = useState('');
   const [submitted,   setSubmitted]   = useState(false);
+  const [showKbzQr,   setShowKbzQr]   = useState(false);
+  const [showWaveQr,  setShowWaveQr]  = useState(false);
+  const [copiedKbz,   setCopiedKbz]   = useState(false);
+  const [copiedWave,  setCopiedWave]  = useState(false);
+
+  const copyToClipboard = (text: string, setter: (v: boolean) => void) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setter(true);
+      setTimeout(() => setter(false), 2000);
+    });
+  };
 
   const licenseOptions = [
     { value: '1year',    label: locale === 'my' ? 'တစ်နှစ်'     : '1 Year'   },
@@ -254,6 +265,121 @@ export default function OrderLicense() {
             .
           </div>
         </div>
+      </div>
+
+      {/* ── Myanmar Payment Methods ────────────────────────────────── */}
+      <div className="mt-10">
+        <div className="flex items-center gap-2 mb-5">
+          <span className="text-xl">💳</span>
+          <h2 className="text-lg font-bold">
+            {locale === 'my' ? 'မြန်မာ ငွေပေးချေနည်းများ' : 'Myanmar Payment Methods'}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          {/* KBZ Pay */}
+          <div className="rounded-xl border-2 p-5 space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950 flex items-center justify-center text-lg font-bold text-blue-700 dark:text-blue-300 shrink-0">K</div>
+              <div>
+                <p className="font-bold text-sm">KBZ Pay</p>
+                <p className="text-xs text-muted-foreground">
+                  {locale === 'my' ? 'U Nyi Ye Lin' : 'U Nyi Ye Lin'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-4 py-3">
+              <span className="font-mono text-lg font-bold tracking-wider select-all flex-1">686022905</span>
+              <button
+                type="button"
+                onClick={() => copyToClipboard('686022905', setCopiedKbz)}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                title={locale === 'my' ? 'ကူးယူ' : 'Copy'}
+              >
+                {copiedKbz ? <CheckIcon className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+              </button>
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full gap-2"
+              onClick={() => setShowKbzQr(v => !v)}
+            >
+              <QrCode className="h-4 w-4" />
+              {showKbzQr
+                ? (locale === 'my' ? 'QR ကုဒ် ပိတ်မည်' : 'Hide QR Code')
+                : (locale === 'my' ? 'QR ကုဒ် ကြည့်မည်' : 'Show QR Code')}
+            </Button>
+
+            {showKbzQr && (
+              <div className="flex flex-col items-center pt-1">
+                <img
+                  src="/kbzpay-qr.png"
+                  alt="KBZ Pay QR Code"
+                  className="w-48 h-48 object-contain rounded-xl border"
+                />
+                <p className="text-xs text-muted-foreground mt-2">U Nyi Ye Lin (*2905)</p>
+              </div>
+            )}
+          </div>
+
+          {/* Wave Money */}
+          <div className="rounded-xl border-2 p-5 space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-orange-100 dark:bg-orange-950 flex items-center justify-center text-lg font-bold text-orange-700 dark:text-orange-300 shrink-0">W</div>
+              <div>
+                <p className="font-bold text-sm">Wave Money</p>
+                <p className="text-xs text-muted-foreground">
+                  {locale === 'my' ? 'Nyi Ye Lin' : 'Nyi Ye Lin'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 bg-muted/50 rounded-lg px-4 py-3">
+              <span className="font-mono text-lg font-bold tracking-wider select-all flex-1">771180852</span>
+              <button
+                type="button"
+                onClick={() => copyToClipboard('771180852', setCopiedWave)}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                title={locale === 'my' ? 'ကူးယူ' : 'Copy'}
+              >
+                {copiedWave ? <CheckIcon className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+              </button>
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full gap-2"
+              onClick={() => setShowWaveQr(v => !v)}
+            >
+              <QrCode className="h-4 w-4" />
+              {showWaveQr
+                ? (locale === 'my' ? 'QR ကုဒ် ပိတ်မည်' : 'Hide QR Code')
+                : (locale === 'my' ? 'QR ကုဒ် ကြည့်မည်' : 'Show QR Code')}
+            </Button>
+
+            {showWaveQr && (
+              <div className="flex flex-col items-center pt-1">
+                <img
+                  src="/wavemoney-qr.png"
+                  alt="Wave Money QR Code"
+                  className="w-48 h-48 object-contain rounded-xl border"
+                />
+                <p className="text-xs text-muted-foreground mt-2">Nyi Ye Lin (09771180852)</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <p className="text-xs text-muted-foreground mt-4 text-center">
+          {locale === 'my'
+            ? 'ငွေပေးချေပြီးနောက် ငွေပေးချေမှု screenshot နှင့်အတူ ကျွန်ုပ်တို့ support team ကို ဆက်သွယ်ပါ'
+            : 'After payment, send your payment screenshot to our support team to confirm and process your order.'}
+        </p>
       </div>
     </div>
   );
