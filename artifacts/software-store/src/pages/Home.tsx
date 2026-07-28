@@ -1,4 +1,4 @@
-import { ExternalLink, Download, ShieldCheck, Star, Zap, Clock, ArrowRight, KeyRound } from 'lucide-react';
+import { Download, ShieldCheck, Star, Zap, Clock, ArrowRight, KeyRound } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,8 +6,25 @@ import { Link } from 'wouter';
 import { useGeo } from '@/context/GeoContext';
 import { translations, formatPrice } from '@/context/translations';
 
+/** Simple Windows logo icon (four-pane flag) */
+const WindowsIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 88 88" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12.402l35.687-4.86.016 34.423-35.67.202zm35.67 33.529.028 34.453L.028 75.48.026 45.7zm4.326-38.951L87.314 0v41.527l-47.318.376zm47.329 39.26-.011 41.34-47.318-6.678-.066-34.739z"/>
+  </svg>
+);
+
+/** Mega cloud icon */
+const MegaIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 15.67c0 .195-.077.382-.215.52l-2.23 2.23a.735.735 0 0 1-.52.215.735.735 0 0 1-.52-.215L12 16.01l-2.41 2.41a.735.735 0 0 1-.52.215.735.735 0 0 1-.52-.215l-2.23-2.23a.735.735 0 0 1-.215-.52c0-.195.077-.382.215-.52L8.73 13.24 6.32 10.83a.735.735 0 0 1-.215-.52c0-.195.077-.382.215-.52l2.23-2.23a.735.735 0 0 1 .52-.215c.195 0 .382.077.52.215L12 10.01l2.41-2.41a.735.735 0 0 1 .52-.215c.195 0 .382.077.52.215l2.23 2.23c.138.138.215.325.215.52 0 .195-.077.382-.215.52l-2.41 2.41 2.41 2.41c.138.138.215.325.215.52z"/>
+  </svg>
+);
+
 const trustIcons = [ShieldCheck, Zap, Clock, Star];
 const trustColors = ['text-green-500', 'text-yellow-500', 'text-blue-500', 'text-purple-500'];
+
+const MEGA_LICENSE_X64 = 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY';
+const MEGA_LICENSE_X86 = 'https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY';
 
 const products = [
   {
@@ -21,7 +38,8 @@ const products = [
     icon: '⚡',
     gradient: 'from-blue-500/10 to-indigo-500/10',
     accent: 'bg-blue-500',
-    trialUrl: 'https://www.internetdownloadmanager.com/download.html',
+    x64Url: 'https://www.internetdownloadmanager.com/download.html',
+    x86Url: 'https://www.internetdownloadmanager.com/download.html',
     purchaseUrl: 'https://www.internetdownloadmanager.com/register.html',
     descKey: 'idm' as const,
     featureKey: 'idm' as const,
@@ -37,7 +55,8 @@ const products = [
     icon: '📦',
     gradient: 'from-orange-500/10 to-red-500/10',
     accent: 'bg-orange-500',
-    trialUrl: 'https://www.win-rar.com/download.html',
+    x64Url: 'https://www.rarlab.com/rar/winrar-x64-710.exe',
+    x86Url: 'https://www.rarlab.com/rar/wrar710.exe',
     purchaseUrl: 'https://www.win-rar.com/register.html',
     descKey: 'winrar' as const,
     featureKey: 'winrar' as const,
@@ -173,14 +192,31 @@ export default function Home() {
                   </ul>
                 </CardContent>
 
-                <CardFooter className="pt-4 border-t bg-background/50 gap-3 flex-wrap">
-                  <Button asChild variant="default" className="flex-1 gap-2 min-w-0">
-                    <a href={product.trialUrl} target="_blank" rel="noopener noreferrer">
-                      <Download className="h-4 w-4 shrink-0" />
-                      {t.freeTrial}
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" className="flex-1 min-w-0">
+                <CardFooter className="pt-4 border-t bg-background/50 flex-col gap-3">
+                  {/* Architecture download buttons */}
+                  <div className="w-full space-y-2">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                      <WindowsIcon className="h-3 w-3" />
+                      {locale === 'my' ? 'Windows ဒေါင်းလုပ်' : 'Windows Download'}
+                    </p>
+                    <div className="flex gap-2 w-full">
+                      <Button asChild variant="default" size="sm" className="flex-1 gap-1.5 font-semibold">
+                        <a href={product.x64Url} target="_blank" rel="noopener noreferrer">
+                          <WindowsIcon className="h-3.5 w-3.5 shrink-0" />
+                          <Download className="h-3 w-3 shrink-0" />
+                          64-bit
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline" size="sm" className="flex-1 gap-1.5 font-semibold">
+                        <a href={product.x86Url} target="_blank" rel="noopener noreferrer">
+                          <WindowsIcon className="h-3.5 w-3.5 shrink-0" />
+                          <Download className="h-3 w-3 shrink-0" />
+                          32-bit
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                  <Button asChild variant="ghost" size="sm" className="w-full border border-dashed">
                     <Link href="/order-license">{t.buyLicense}</Link>
                   </Button>
                 </CardFooter>
@@ -224,18 +260,37 @@ export default function Home() {
                     ))}
                   </ol>
                 </div>
-                {/* Right: download button */}
-                <div className="md:w-56 shrink-0">
-                  <Button asChild className="w-full gap-2 h-12 text-base font-semibold shadow-md">
+                {/* Right: architecture download buttons */}
+                <div className="md:w-64 shrink-0 space-y-2.5">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                    <WindowsIcon className="h-3 w-3 text-primary" />
+                    {locale === 'my' ? 'Mega မှ ဒေါင်းလုပ်' : 'Download via Mega'}
+                  </p>
+                  <Button asChild className="w-full gap-2 h-11 font-semibold shadow-md">
                     <a
-                      href="https://mega.nz/file/jlxxiKoL#VJpj11uOnzt4VKTLkF6yOAc7_kvix5s_5gLB509cNJY"
+                      href={MEGA_LICENSE_X64}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Download className="h-5 w-5 shrink-0" />
-                      {locale === 'my' ? 'ဒေါင်းလုပ်' : 'Download Now'}
+                      <WindowsIcon className="h-4 w-4 shrink-0" />
+                      <Download className="h-4 w-4 shrink-0" />
+                      {locale === 'my' ? '၆၄-ဘစ် (Mega)' : '64-bit — Mega'}
                     </a>
                   </Button>
+                  <Button asChild variant="outline" className="w-full gap-2 h-11 font-semibold">
+                    <a
+                      href={MEGA_LICENSE_X86}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <WindowsIcon className="h-4 w-4 shrink-0" />
+                      <Download className="h-4 w-4 shrink-0" />
+                      {locale === 'my' ? '၃၂-ဘစ် (Mega)' : '32-bit — Mega'}
+                    </a>
+                  </Button>
+                  <p className="text-[10px] text-muted-foreground text-center leading-relaxed">
+                    {locale === 'my' ? 'Mega မှတဆင့် လုံခြုံစိတ်ချစွာ ဒေါင်းလုပ်ဆွဲနိုင်သည်' : 'Securely hosted on Mega cloud'}
+                  </p>
                 </div>
               </div>
             </CardContent>
