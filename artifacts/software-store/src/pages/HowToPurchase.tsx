@@ -1,4 +1,4 @@
-import { MonitorSmartphone, KeyRound, Send, Mail, Star, HelpCircle } from 'lucide-react';
+import { MonitorSmartphone, KeyRound, Send, Mail, Star, HelpCircle, PlayCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -51,6 +51,35 @@ export default function HowToPurchase() {
             </div>
           );
         })}
+      </div>
+
+      {/* Video Tutorial */}
+      <div className="mb-16">
+        <div className="flex items-center gap-2 mb-6 justify-center">
+          <PlayCircle className="h-5 w-5 text-primary" />
+          <h2 className="text-xl font-bold">Video Tutorial</h2>
+        </div>
+        <div className="rounded-2xl border bg-card shadow-lg overflow-hidden">
+          <div className="p-5 md:p-6 border-b bg-muted/30">
+            <h3 className="text-base md:text-lg font-bold leading-snug mb-1">
+              How to Buy &amp; Activate License — Step-by-Step Tutorial
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Watch our complete walkthrough: choose your software, complete the payment, and activate your license in minutes.
+            </p>
+          </div>
+          {/* Responsive 16:9 iframe */}
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/52Cqm_-4YaE?si=zcY6G2gf5McYp_Hi"
+              title="How to Buy & Activate License - Step-by-Step Tutorial"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
       </div>
 
       {/* Quick links */}
