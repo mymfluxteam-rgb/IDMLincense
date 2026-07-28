@@ -650,7 +650,7 @@ export default function OrderLicense() {
               : 'Send the exact purchase amount to any address below. Payment is auto-detected.'}
           </p>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {CRYPTO_ASSETS.map((asset) => {
               const isSelected = selectedCrypto === asset.id;
               return (
@@ -661,36 +661,34 @@ export default function OrderLicense() {
                   tabIndex={0}
                   onClick={() => setSelectedCrypto(asset.id)}
                   onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') setSelectedCrypto(asset.id); }}
-                  className={`rounded-2xl border-2 p-4 cursor-pointer transition-all duration-200 ${
+                  className={`flex flex-col rounded-2xl border-2 p-4 cursor-pointer transition-all duration-200 ${
                     isSelected
                       ? `${asset.border} ${asset.bg} shadow-md`
                       : 'border-border bg-card hover:border-muted-foreground/30 hover:bg-muted/20'
                   }`}
                 >
-                  {/* Card header */}
-                  <div className="flex items-center gap-3 mb-3">
+                  {/* Card header: radio + icon + labels */}
+                  <div className="flex items-start gap-2.5 mb-3">
                     {/* Radio indicator */}
-                    <div className={`h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
+                    <div className={`mt-0.5 h-4 w-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
                       isSelected ? `${asset.color} border-current` : 'border-muted-foreground/40'
                     }`}>
-                      {isSelected && (
-                        <div className="h-2 w-2 rounded-full bg-current" />
-                      )}
+                      {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-current" />}
                     </div>
 
                     {/* Coin icon */}
-                    <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${
+                    <div className={`h-9 w-9 rounded-xl flex items-center justify-center shrink-0 transition-all ${
                       isSelected ? `${asset.bg} border ${asset.border}` : 'bg-muted/50 border border-border'
                     }`}>
-                      <span className={`text-xl font-black ${isSelected ? asset.color : 'text-muted-foreground'}`}>
+                      <span className={`text-lg font-black ${isSelected ? asset.color : 'text-muted-foreground'}`}>
                         {asset.icon}
                       </span>
                     </div>
 
-                    {/* Labels */}
+                    {/* Name + network */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-sm">{asset.label}</span>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="font-bold text-sm leading-tight">{asset.label}</span>
                         <Badge
                           variant="outline"
                           className={`text-[10px] font-mono px-1.5 py-0 transition-colors ${
@@ -700,7 +698,7 @@ export default function OrderLicense() {
                           {asset.ticker}
                         </Badge>
                       </div>
-                      <p className={`text-xs font-semibold mt-0.5 transition-colors ${
+                      <p className={`text-[11px] font-semibold mt-0.5 leading-tight transition-colors ${
                         isSelected ? asset.color : 'text-muted-foreground'
                       }`}>
                         {asset.network}
@@ -709,32 +707,32 @@ export default function OrderLicense() {
 
                     {/* Selected checkmark */}
                     {isSelected && (
-                      <div className={`h-6 w-6 rounded-full flex items-center justify-center shrink-0 ${asset.color} bg-current`}>
-                        <CheckIcon className="h-3.5 w-3.5 text-white" />
+                      <div className={`h-5 w-5 rounded-full flex items-center justify-center shrink-0 ${asset.color} bg-current`}>
+                        <CheckIcon className="h-3 w-3 text-white" />
                       </div>
                     )}
                   </div>
 
-                  {/* Address row */}
-                  <div className="flex items-center gap-2 bg-background/80 rounded-xl px-3 py-2.5 border border-border/60">
-                    <code className="text-xs font-mono break-all flex-1 select-all leading-relaxed text-muted-foreground">
+                  {/* Address row — truncated for compact display */}
+                  <div className="flex items-center gap-1.5 bg-background/80 rounded-xl px-2.5 py-2 border border-border/60 mt-auto">
+                    <code className="text-[11px] font-mono truncate flex-1 select-all text-muted-foreground">
                       {asset.address}
                     </code>
                     <button
                       type="button"
                       onClick={(e) => { e.stopPropagation(); copyCrypto(asset.id, asset.address); }}
-                      className={`shrink-0 h-7 w-7 rounded-lg flex items-center justify-center transition-all ${
+                      className={`shrink-0 h-6 w-6 rounded-md flex items-center justify-center transition-all ${
                         copiedCrypto[asset.id]
                           ? 'bg-green-100 dark:bg-green-900 text-green-600'
                           : 'border hover:bg-muted text-muted-foreground'
                       }`}
                       title={isMy ? 'ကူးယူ' : 'Copy address'}
                     >
-                      {copiedCrypto[asset.id] ? <CheckIcon className="h-3.5 w-3.5" /> : <Copy className="h-3 w-3" />}
+                      {copiedCrypto[asset.id] ? <CheckIcon className="h-3 w-3" /> : <Copy className="h-2.5 w-2.5" />}
                     </button>
                   </div>
                   {copiedCrypto[asset.id] && (
-                    <p className="text-xs text-green-600 mt-1.5 font-medium">✓ {isMy ? 'ကူးယူပြီး' : 'Address copied!'}</p>
+                    <p className="text-[11px] text-green-600 mt-1 font-medium">✓ {isMy ? 'ကူးယူပြီး' : 'Copied!'}</p>
                   )}
 
                   {/* Trust Wallet link */}
@@ -744,11 +742,11 @@ export default function OrderLicense() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className={`inline-flex items-center gap-1.5 text-xs font-semibold ${asset.color} hover:underline`}
+                      className={`inline-flex items-center gap-1 text-[11px] font-semibold ${asset.color} hover:underline`}
                     >
-                      <Wallet className="h-3.5 w-3.5" />
-                      {isMy ? 'Trust Wallet ဖြင့် ပေးပို့' : 'Send via Trust Wallet'}
-                      <ExternalLink className="h-3 w-3" />
+                      <Wallet className="h-3 w-3" />
+                      {isMy ? 'Trust Wallet' : 'Trust Wallet'}
+                      <ExternalLink className="h-2.5 w-2.5" />
                     </a>
                   </div>
                 </div>

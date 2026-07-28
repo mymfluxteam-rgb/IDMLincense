@@ -225,7 +225,7 @@ export default function Home() {
                         {locale === 'my' ? 'လိုင်စင် ဆော့ဖ်ဝဲ ဒေါင်းလုပ်' : 'License Software Download'}
                       </h3>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        {locale === 'my' ? 'ဝယ်ယူပြီးသောသူများအတွက်' : 'For customers who have already purchased'}
+                        {locale === 'my' ? 'လိုင်စင် အသက်သွင်းရန် အစပိုင်း တပ်ဆင်မှု လိုအပ်သည်' : 'Initial installation is required to activate the license'}
                       </p>
                     </div>
                   </div>
