@@ -165,6 +165,9 @@ export default function OrderLicense() {
 
   /* ── Telegram message builder ── */
   const buildTelegramMessage = useCallback((method: string) => {
+    const cryptoAsset = selectedCrypto
+      ? CRYPTO_ASSETS.find(a => a.id === selectedCrypto)
+      : null;
     const lines = [
       '🛒 New License Order — SoftStore',
       '',
@@ -175,11 +178,15 @@ export default function OrderLicense() {
       `🔑 HWID:    ${hwid}`,
       '',
       `💳 Payment: ${method}`,
+      ...(cryptoAsset ? [
+        `🪙 Crypto:  ${cryptoAsset.label} (${cryptoAsset.network})`,
+        `📍 Address: ${cryptoAsset.address}`,
+      ] : []),
       '',
       'Please process my order. Thank you! 🙏',
     ];
     return lines.join('\n');
-  }, [selectedProduct, selectedLicenseOpt, selectedPrice, email, hwid, product, licenseType]);
+  }, [selectedProduct, selectedLicenseOpt, selectedPrice, email, hwid, product, licenseType, selectedCrypto]);
 
   /* ── Open Telegram with order details pre-filled in the chat box ── */
   const openTelegramWithOrder = useCallback((paymentLabel: string) => {
@@ -254,6 +261,7 @@ export default function OrderLicense() {
   const reset = () => {
     setStep('form'); setPaymentMethod(null);
     setProduct(''); setLicenseType(''); setEmail(''); setHwid('');
+    setSelectedCrypto(null);
     setTxStatus('idle'); if (pollRef.current) clearInterval(pollRef.current);
   };
 
@@ -643,59 +651,132 @@ export default function OrderLicense() {
           </p>
 
           <div className="space-y-3">
-            {CRYPTO_ASSETS.map((asset) => (
-              <div
-                key={asset.id}
-                className={`rounded-xl border-2 ${asset.border} ${asset.bg} p-4`}
-              >
-                <div className="flex items-start gap-3">
-                  <div className={`text-2xl font-black ${asset.color} select-none w-8 text-center shrink-0 mt-0.5`}>
-                    {asset.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="font-bold text-sm">{asset.label}</span>
-                      <Badge variant="outline" className="text-[10px] font-mono px-1.5 py-0">
-                        {asset.ticker}
-                      </Badge>
-                      <span className={`text-[10px] font-semibold uppercase tracking-wider ${asset.color}`}>
-                        {asset.network}
+            {CRYPTO_ASSETS.map((asset) => {
+              const isSelected = selectedCrypto === asset.id;
+              return (
+                <div
+                  key={asset.id}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={0}
+                  onClick={() => setSelectedCrypto(asset.id)}
+                  onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') setSelectedCrypto(asset.id); }}
+                  className={`rounded-2xl border-2 p-4 cursor-pointer transition-all duration-200 ${
+                    isSelected
+                      ? `${asset.border} ${asset.bg} shadow-md`
+                      : 'border-border bg-card hover:border-muted-foreground/30 hover:bg-muted/20'
+                  }`}
+                >
+                  {/* Card header */}
+                  <div className="flex items-center gap-3 mb-3">
+                    {/* Radio indicator */}
+                    <div className={`h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all ${
+                      isSelected ? `${asset.color} border-current` : 'border-muted-foreground/40'
+                    }`}>
+                      {isSelected && (
+                        <div className="h-2 w-2 rounded-full bg-current" />
+                      )}
+                    </div>
+
+                    {/* Coin icon */}
+                    <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${
+                      isSelected ? `${asset.bg} border ${asset.border}` : 'bg-muted/50 border border-border'
+                    }`}>
+                      <span className={`text-xl font-black ${isSelected ? asset.color : 'text-muted-foreground'}`}>
+                        {asset.icon}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 bg-background/70 rounded-lg px-3 py-2 mt-1">
-                      <code className="text-xs font-mono break-all flex-1 select-all leading-relaxed">
-                        {asset.address}
-                      </code>
-                      <button
-                        onClick={() => copyCrypto(asset.id, asset.address)}
-                        className={`shrink-0 h-7 w-7 rounded-md flex items-center justify-center transition-all ${
-                          copiedCrypto[asset.id]
-                            ? 'bg-green-100 dark:bg-green-900 text-green-600'
-                            : 'border hover:bg-muted text-muted-foreground'
-                        }`}
-                        title={isMy ? 'ကူးယူ' : 'Copy address'}
-                      >
-                        {copiedCrypto[asset.id] ? <CheckIcon className="h-3.5 w-3.5" /> : <Copy className="h-3 w-3" />}
-                      </button>
+
+                    {/* Labels */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-bold text-sm">{asset.label}</span>
+                        <Badge
+                          variant="outline"
+                          className={`text-[10px] font-mono px-1.5 py-0 transition-colors ${
+                            isSelected ? `${asset.color} border-current` : ''
+                          }`}
+                        >
+                          {asset.ticker}
+                        </Badge>
+                      </div>
+                      <p className={`text-xs font-semibold mt-0.5 transition-colors ${
+                        isSelected ? asset.color : 'text-muted-foreground'
+                      }`}>
+                        {asset.network}
+                      </p>
                     </div>
+
+                    {/* Selected checkmark */}
+                    {isSelected && (
+                      <div className={`h-6 w-6 rounded-full flex items-center justify-center shrink-0 ${asset.color} bg-current`}>
+                        <CheckIcon className="h-3.5 w-3.5 text-white" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Address row */}
+                  <div className="flex items-center gap-2 bg-background/80 rounded-xl px-3 py-2.5 border border-border/60">
+                    <code className="text-xs font-mono break-all flex-1 select-all leading-relaxed text-muted-foreground">
+                      {asset.address}
+                    </code>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); copyCrypto(asset.id, asset.address); }}
+                      className={`shrink-0 h-7 w-7 rounded-lg flex items-center justify-center transition-all ${
+                        copiedCrypto[asset.id]
+                          ? 'bg-green-100 dark:bg-green-900 text-green-600'
+                          : 'border hover:bg-muted text-muted-foreground'
+                      }`}
+                      title={isMy ? 'ကူးယူ' : 'Copy address'}
+                    >
+                      {copiedCrypto[asset.id] ? <CheckIcon className="h-3.5 w-3.5" /> : <Copy className="h-3 w-3" />}
+                    </button>
+                  </div>
+                  {copiedCrypto[asset.id] && (
+                    <p className="text-xs text-green-600 mt-1.5 font-medium">✓ {isMy ? 'ကူးယူပြီး' : 'Address copied!'}</p>
+                  )}
+
+                  {/* Trust Wallet link */}
+                  <div className="mt-2.5 flex justify-end">
+                    <a
+                      href={asset.trustLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className={`inline-flex items-center gap-1.5 text-xs font-semibold ${asset.color} hover:underline`}
+                    >
+                      <Wallet className="h-3.5 w-3.5" />
+                      {isMy ? 'Trust Wallet ဖြင့် ပေးပို့' : 'Send via Trust Wallet'}
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
                   </div>
                 </div>
-                {/* Trust Wallet deeplink */}
-                <div className="mt-3 flex justify-end">
-                  <a
-                    href={asset.trustLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-1.5 text-xs font-semibold ${asset.color} hover:underline`}
-                  >
-                    <Wallet className="h-3.5 w-3.5" />
-                    {isMy ? 'Trust Wallet ဖြင့် ပေးပို့' : 'Send via Trust Wallet'}
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
+
+          {/* Selection hint */}
+          {!selectedCrypto && (
+            <p className="text-xs text-muted-foreground text-center py-1">
+              {isMy ? '↑ ငွေပေးချေမည့် Crypto ကို ရွေးချယ်ပါ' : '↑ Select a crypto option above before sending your order'}
+            </p>
+          )}
+          {selectedCrypto && (() => {
+            const a = CRYPTO_ASSETS.find(x => x.id === selectedCrypto)!;
+            return (
+              <div className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 ${a.bg} ${a.border}`}>
+                <CheckIcon className={`h-4 w-4 shrink-0 ${a.color}`} />
+                <p className="text-sm font-medium">
+                  <span className="text-muted-foreground">{isMy ? 'ရွေးချယ်ထားသော Crypto: ' : 'Selected: '}</span>
+                  <span className={`font-bold ${a.color}`}>{a.label} ({a.network})</span>
+                  <span className="text-muted-foreground font-mono text-xs ml-2 hidden sm:inline">
+                    {a.address.slice(0, 10)}…{a.address.slice(-6)}
+                  </span>
+                </p>
+              </div>
+            );
+          })()}
 
           {/* Auto-detection panel */}
           <div className="rounded-xl border bg-muted/30 p-4 space-y-3">
@@ -746,12 +827,19 @@ export default function OrderLicense() {
           {/* Manual proceed */}
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground text-center">
-              {isMy ? 'သို့မဟုတ် ကိုယ်တိုင် Telegram မှ order ပြုလုပ်နိုင်သည်' : 'Or send order details to Telegram manually after payment:'}
+              {isMy ? 'ငွေပေးချေပြီးနောက် Telegram မှ order ပြုလုပ်ပါ' : 'After payment, send your order to Telegram to complete the purchase:'}
             </p>
             <Button
               variant="outline"
               className="w-full h-11 gap-2 font-semibold"
-              onClick={() => openTelegramWithOrder(isMy ? 'Crypto' : 'International Crypto Payment')}
+              disabled={!selectedCrypto}
+              onClick={() => {
+                const asset = CRYPTO_ASSETS.find(a => a.id === selectedCrypto);
+                const label = asset
+                  ? `Crypto — ${asset.label} (${asset.network})`
+                  : (isMy ? 'Crypto' : 'International Crypto Payment');
+                openTelegramWithOrder(label);
+              }}
             >
               <Send className="h-4 w-4 shrink-0" />
               {isMy ? 'Telegram မှ ဆက်လက်ဆောင်ရွက်မည်' : 'Send Order to Telegram'}
