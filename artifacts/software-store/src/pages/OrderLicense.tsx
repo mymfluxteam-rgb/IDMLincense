@@ -27,7 +27,8 @@ const PRODUCT_OPTIONS = [
   { value: 'winrar', displayName: 'WinRAR',                           icon: '📦' },
 ];
 
-const TELEGRAM_URL = 'https://t.me/NetCodeShop';
+const TELEGRAM_USERNAME = 'NetCodeShop';
+const TELEGRAM_WEB_URL  = `https://t.me/${TELEGRAM_USERNAME}`;
 
 const KBZ_NUMBER  = '09686022905';
 const WAVE_NUMBER = '09771180852';
@@ -177,15 +178,37 @@ export default function OrderLicense() {
     return lines.join('\n');
   }, [selectedProduct, selectedLicenseOpt, selectedPrice, email, hwid, product, licenseType]);
 
-  /* ── Myanmar "Proceed" → copy + open Telegram ── */
-  const proceedMyanmar = (paymentLabel: string) => {
-    const msg = buildTelegramMessage(paymentLabel);
-    navigator.clipboard.writeText(msg).then(() => {
-      setTelegramMsgCopied(true);
-      setTimeout(() => setTelegramMsgCopied(false), 4000);
-    });
-    window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
-  };
+  /* ── Open Telegram with order details pre-filled in the chat box ── */
+  const openTelegramWithOrder = useCallback((paymentLabel: string) => {
+    const msg     = buildTelegramMessage(paymentLabel);
+    const encoded = encodeURIComponent(msg);
+
+    // tg:// deep-link: opens native Telegram app with message pre-filled
+    // Falls back to Telegram Web (no pre-fill) if the app isn't installed
+    const deepLink = `tg://resolve?domain=${TELEGRAM_USERNAME}&text=${encoded}`;
+    const webLink  = `${TELEGRAM_WEB_URL}?text=${encoded}`;
+
+    // Attempt native app via hidden anchor (avoids popup-blocker on tg://)
+    const anchor = document.createElement('a');
+    anchor.href = deepLink;
+    anchor.rel  = 'noopener noreferrer';
+    anchor.target = '_blank';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+
+    // After 600 ms open the web fallback so the chat is reachable even if
+    // the Telegram app is not installed or the tg:// protocol wasn't handled
+    setTimeout(() => {
+      window.open(webLink, '_blank', 'noopener,noreferrer');
+    }, 600);
+
+    // Keep clipboard copy as a last-resort fallback
+    navigator.clipboard.writeText(msg).catch(() => {});
+
+    setTelegramMsgCopied(true);
+    setTimeout(() => setTelegramMsgCopied(false), 5000);
+  }, [buildTelegramMessage]);
 
   /* ── Crypto tx polling ── */
   const startPolling = useCallback(() => {
@@ -211,9 +234,7 @@ export default function OrderLicense() {
             clearInterval(pollRef.current!);
             setTxStatus('detected');
             // Auto-open Telegram on detection
-            const msg = buildTelegramMessage('Crypto (auto-detected)');
-            navigator.clipboard.writeText(msg).catch(() => {});
-            window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
+            openTelegramWithOrder(isMy ? 'Crypto (auto-detect)' : 'International Crypto Payment');
           }
         }
       } catch { /* network hiccup, keep polling */ }
@@ -576,7 +597,7 @@ export default function OrderLicense() {
           <div className="space-y-2">
             <Button
               className="w-full h-12 gap-2 text-base font-bold shadow-md"
-              onClick={() => proceedMyanmar(isMy ? 'KBZ Pay / Wave Money' : 'Myanmar Payment (KBZ Pay / Wave Money)')}
+              onClick={() => openTelegramWithOrder(isMy ? 'KBZ Pay / Wave Money' : 'Myanmar Payment (KBZ Pay / Wave Money)')}
             >
               <Send className="h-5 w-5 shrink-0" />
               {isMy ? 'Telegram မှ Order ပြုလုပ်မည်' : 'Proceed to Purchase via Telegram'}
@@ -586,8 +607,8 @@ export default function OrderLicense() {
                 <CheckIcon className="h-4 w-4 shrink-0" />
                 <span>
                   {isMy
-                    ? 'မှာယူမှုအသေးစိတ် ကူးယူပြီး — Telegram တွင် paste လုပ်ပြီး send ပါ'
-                    : 'Order details copied! Paste and send in the Telegram chat.'}
+                    ? 'မှာယူမှုအသေးစိတ် Telegram တွင် အော်တိုဖြည့်သွင်းပြီ — "Send" ကိုနှိပ်ပါ'
+                    : 'Telegram opened with your order pre-filled — just tap Send!'}
                 </span>
               </div>
             )}
@@ -711,11 +732,7 @@ export default function OrderLicense() {
               <Button
                 size="sm"
                 className="w-full gap-2"
-                onClick={() => {
-                  const msg = buildTelegramMessage(isMy ? 'Crypto (auto-detect)' : 'Crypto (auto-detected)');
-                  navigator.clipboard.writeText(msg).catch(() => {});
-                  window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
-                }}
+                onClick={() => openTelegramWithOrder(isMy ? 'Crypto (auto-detect)' : 'International Crypto Payment')}
               >
                 <Send className="h-4 w-4" />
                 {isMy ? 'Telegram ဖွင့်မည်' : 'Open Telegram'}
@@ -731,7 +748,7 @@ export default function OrderLicense() {
             <Button
               variant="outline"
               className="w-full h-11 gap-2 font-semibold"
-              onClick={() => proceedMyanmar(isMy ? 'Crypto' : 'International Crypto Payment')}
+              onClick={() => openTelegramWithOrder(isMy ? 'Crypto' : 'International Crypto Payment')}
             >
               <Send className="h-4 w-4 shrink-0" />
               {isMy ? 'Telegram မှ ဆက်လက်ဆောင်ရွက်မည်' : 'Send Order to Telegram'}
