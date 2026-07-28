@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ShieldCheck, Clock, Mail, KeyRound, QrCode, Copy, Check as CheckIcon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ShieldCheck, Clock, Mail, KeyRound, QrCode, Copy, Check as CheckIcon, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -41,10 +41,9 @@ export default function OrderLicense() {
   const [email,       setEmail]       = useState('');
   const [hwid,        setHwid]        = useState('');
   const [submitted,   setSubmitted]   = useState(false);
-  const [showKbzQr,   setShowKbzQr]   = useState(false);
-  const [showWaveQr,  setShowWaveQr]  = useState(false);
-  const [copiedKbz,   setCopiedKbz]   = useState(false);
-  const [copiedWave,  setCopiedWave]  = useState(false);
+  const [copiedKbz,  setCopiedKbz]  = useState(false);
+  const [copiedWave, setCopiedWave] = useState(false);
+  const [qrModal,    setQrModal]    = useState<'kbz' | 'wave' | null>(null);
 
   const copyToClipboard = (text: string, setter: (v: boolean) => void) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -52,6 +51,17 @@ export default function OrderLicense() {
       setTimeout(() => setter(false), 2000);
     });
   };
+
+  useEffect(() => {
+    if (!qrModal) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setQrModal(null); };
+    document.addEventListener('keydown', handler);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handler);
+      document.body.style.overflow = '';
+    };
+  }, [qrModal]);
 
   const licenseOptions = [
     { value: '1year',    label: locale === 'my' ? 'တစ်နှစ်'     : '1 Year'   },
@@ -331,33 +341,16 @@ export default function OrderLicense() {
                 )}
               </div>
 
-              {/* QR toggle */}
+              {/* QR button */}
               <Button
-                variant={showKbzQr ? 'default' : 'outline'}
+                variant="outline"
                 size="sm"
                 className="w-full gap-2 h-9 text-sm font-medium"
-                onClick={() => setShowKbzQr(v => !v)}
+                onClick={() => setQrModal('kbz')}
               >
                 <QrCode className="h-4 w-4" />
-                {showKbzQr
-                  ? (locale === 'my' ? 'QR ကုဒ် ပိတ်မည်' : 'Hide QR Code')
-                  : (locale === 'my' ? 'QR ကုဒ် ပြမည်' : 'Show QR Code')}
+                {locale === 'my' ? 'QR ကုဒ် ကြည့်မည်' : 'Show QR Code'}
               </Button>
-
-              {/* QR panel */}
-              {showKbzQr && (
-                <div className="rounded-xl border bg-white dark:bg-zinc-900 p-5 flex flex-col items-center gap-3 shadow-inner">
-                  <img
-                    src="/kbzpay-qr.png"
-                    alt="KBZ Pay QR Code"
-                    className="w-56 h-56 object-contain"
-                  />
-                  <div className="text-center">
-                    <p className="text-sm font-semibold text-foreground">U Nyi Ye Lin</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">KBZ Pay · *2905</p>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
@@ -409,33 +402,16 @@ export default function OrderLicense() {
                 )}
               </div>
 
-              {/* QR toggle */}
+              {/* QR button */}
               <Button
-                variant={showWaveQr ? 'default' : 'outline'}
+                variant="outline"
                 size="sm"
                 className="w-full gap-2 h-9 text-sm font-medium"
-                onClick={() => setShowWaveQr(v => !v)}
+                onClick={() => setQrModal('wave')}
               >
                 <QrCode className="h-4 w-4" />
-                {showWaveQr
-                  ? (locale === 'my' ? 'QR ကုဒ် ပိတ်မည်' : 'Hide QR Code')
-                  : (locale === 'my' ? 'QR ကုဒ် ပြမည်' : 'Show QR Code')}
+                {locale === 'my' ? 'QR ကုဒ် ကြည့်မည်' : 'Show QR Code'}
               </Button>
-
-              {/* QR panel */}
-              {showWaveQr && (
-                <div className="rounded-xl border bg-white dark:bg-zinc-900 p-5 flex flex-col items-center gap-3 shadow-inner">
-                  <img
-                    src="/wavemoney-qr.png"
-                    alt="Wave Money QR Code"
-                    className="w-56 h-56 object-contain"
-                  />
-                  <div className="text-center">
-                    <p className="text-sm font-semibold text-foreground">Nyi Ye Lin</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">Wave Money · 09771180852</p>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -450,6 +426,101 @@ export default function OrderLicense() {
           </p>
         </div>
       </div>
+
+      {/* ── QR Code Modal ─────────────────────────────────────────── */}
+      {qrModal && (() => {
+        const isKbz = qrModal === 'kbz';
+        const accentFrom = isKbz ? 'from-blue-500'   : 'from-orange-500';
+        const accentTo   = isKbz ? 'to-blue-400'     : 'to-amber-400';
+        const badgeBg    = isKbz ? 'bg-blue-600'     : 'bg-orange-500';
+        const badgeLabel = isKbz ? 'KBZ'             : 'WAVE';
+        const methodName = isKbz ? 'KBZ Pay'         : 'Wave Money';
+        const holderName = isKbz ? 'U Nyi Ye Lin'    : 'Nyi Ye Lin';
+        const accountNo  = isKbz ? '686022905'       : '771180852';
+        const accountSub = isKbz ? 'KBZ Pay · *2905' : 'Wave Money · 09771180852';
+        const imgSrc     = isKbz ? '/kbzpay-qr.png'  : '/wavemoney-qr.png';
+        const imgAlt     = isKbz ? 'KBZ Pay QR Code' : 'Wave Money QR Code';
+
+        return (
+          /* Backdrop */
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(4px)' }}
+            onClick={() => setQrModal(null)}
+          >
+            {/* Modal card */}
+            <div
+              className="relative w-full max-w-sm rounded-3xl bg-card shadow-2xl overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Accent strip */}
+              <div className={`h-1.5 w-full bg-gradient-to-r ${accentFrom} ${accentTo}`} />
+
+              {/* Close button */}
+              <button
+                type="button"
+                onClick={() => setQrModal(null)}
+                className="absolute top-3.5 right-3.5 h-8 w-8 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors z-10"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              <div className="px-7 pt-6 pb-8 flex flex-col items-center gap-5">
+                {/* Brand header */}
+                <div className="flex items-center gap-3">
+                  <div className={`h-10 w-10 rounded-xl ${badgeBg} flex items-center justify-center shrink-0 shadow-sm`}>
+                    <span className="text-white font-extrabold text-xs tracking-tight">{badgeLabel}</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-base leading-tight">{methodName}</p>
+                    <p className="text-xs text-muted-foreground">{holderName}</p>
+                  </div>
+                </div>
+
+                {/* QR image */}
+                <div className="rounded-2xl bg-white p-4 shadow-inner">
+                  <img
+                    src={imgSrc}
+                    alt={imgAlt}
+                    className="w-72 h-72 object-contain"
+                    draggable={false}
+                  />
+                </div>
+
+                {/* Account details */}
+                <div className="w-full text-center space-y-1.5">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                    {locale === 'my' ? 'ဖုန်းနံပါတ်' : 'Account Number'}
+                  </p>
+                  <p className="font-mono text-3xl font-bold tracking-widest text-foreground select-all">
+                    {accountNo}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{accountSub}</p>
+                </div>
+
+                {/* Scan hint */}
+                <p className="text-xs text-muted-foreground text-center leading-relaxed">
+                  {locale === 'my'
+                    ? 'Payment app ဖွင့်ပြီး QR ကုဒ်ကို scan ပါ'
+                    : 'Open your payment app and scan the QR code above'}
+                </p>
+
+                {/* Dismiss button */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full gap-2"
+                  onClick={() => setQrModal(null)}
+                >
+                  <X className="h-3.5 w-3.5" />
+                  {locale === 'my' ? 'ပိတ်မည်' : 'Close'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
