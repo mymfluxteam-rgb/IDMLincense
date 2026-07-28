@@ -117,6 +117,9 @@ export default function OrderLicense() {
   const [copiedCrypto, setCopiedCrypto] = useState<Record<string, boolean>>({});
   const [telegramMsgCopied, setTelegramMsgCopied] = useState(false);
 
+  /* selected crypto */
+  const [selectedCrypto, setSelectedCrypto] = useState<string | null>(null);
+
   /* tx polling */
   const [txStatus,  setTxStatus]  = useState<'idle' | 'polling' | 'detected'>('idle');
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
