@@ -193,29 +193,13 @@ export default function Home() {
                 </CardContent>
 
                 <CardFooter className="pt-4 border-t bg-background/50 flex-col gap-3">
-                  {/* Architecture download buttons */}
-                  <div className="w-full space-y-2">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                      <WindowsIcon className="h-3 w-3" />
-                      {locale === 'my' ? 'Windows ဒေါင်းလုပ်' : 'Windows Download'}
-                    </p>
-                    <div className="flex gap-2 w-full">
-                      <Button asChild variant="default" size="sm" className="flex-1 gap-1.5 font-semibold">
-                        <a href={product.x64Url} target="_blank" rel="noopener noreferrer">
-                          <WindowsIcon className="h-3.5 w-3.5 shrink-0" />
-                          <Download className="h-3 w-3 shrink-0" />
-                          64-bit
-                        </a>
-                      </Button>
-                      <Button asChild variant="outline" size="sm" className="flex-1 gap-1.5 font-semibold">
-                        <a href={product.x86Url} target="_blank" rel="noopener noreferrer">
-                          <WindowsIcon className="h-3.5 w-3.5 shrink-0" />
-                          <Download className="h-3 w-3 shrink-0" />
-                          32-bit
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
+                  <Button asChild variant="default" className="w-full gap-2 font-semibold">
+                    <a href={product.x64Url} target="_blank" rel="noopener noreferrer">
+                      <WindowsIcon className="h-4 w-4 shrink-0" />
+                      <Download className="h-4 w-4 shrink-0" />
+                      {locale === 'my' ? '64-bit နှင့် 32-bit' : 'Windows 64-bit / 32-bit'}
+                    </a>
+                  </Button>
                   <Button asChild variant="ghost" size="sm" className="w-full border border-dashed">
                     <Link href="/order-license">{t.buyLicense}</Link>
                   </Button>
@@ -260,37 +244,19 @@ export default function Home() {
                     ))}
                   </ol>
                 </div>
-                {/* Right: architecture download buttons */}
-                <div className="md:w-64 shrink-0 space-y-2.5">
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                    <WindowsIcon className="h-3 w-3 text-primary" />
-                    {locale === 'my' ? 'Mega မှ ဒေါင်းလုပ်' : 'Download via Mega'}
-                  </p>
-                  <Button asChild className="w-full gap-2 h-11 font-semibold shadow-md">
+                {/* Right: unified download button */}
+                <div className="md:w-56 shrink-0">
+                  <Button asChild className="w-full gap-2 h-12 text-base font-semibold shadow-md">
                     <a
                       href={MEGA_LICENSE_X64}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <WindowsIcon className="h-4 w-4 shrink-0" />
-                      <Download className="h-4 w-4 shrink-0" />
-                      {locale === 'my' ? '၆၄-ဘစ် (Mega)' : '64-bit — Mega'}
+                      <Download className="h-5 w-5 shrink-0" />
+                      {locale === 'my' ? '64-bit နှင့် 32-bit (Mega)' : '64-bit & 32-bit (Mega)'}
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="w-full gap-2 h-11 font-semibold">
-                    <a
-                      href={MEGA_LICENSE_X86}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <WindowsIcon className="h-4 w-4 shrink-0" />
-                      <Download className="h-4 w-4 shrink-0" />
-                      {locale === 'my' ? '၃၂-ဘစ် (Mega)' : '32-bit — Mega'}
-                    </a>
-                  </Button>
-                  <p className="text-[10px] text-muted-foreground text-center leading-relaxed">
-                    {locale === 'my' ? 'Mega မှတဆင့် လုံခြုံစိတ်ချစွာ ဒေါင်းလုပ်ဆွဲနိုင်သည်' : 'Securely hosted on Mega cloud'}
-                  </p>
                 </div>
               </div>
             </CardContent>
