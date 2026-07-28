@@ -5,7 +5,8 @@ import { useGeo } from '@/context/GeoContext';
 import { translations } from '@/context/translations';
 import { Link } from 'wouter';
 
-const CONTACT_EMAIL = 'mahar80729@gmail.com';
+const TELEGRAM_URL = 'https://t.me/NetCodeShop';
+const TELEGRAM_HANDLE = '@NetCodeShop';
 const BRAND = 'SoftStore';
 
 export default function TermsOfService() {
@@ -150,9 +151,14 @@ export default function TermsOfService() {
           <div className="rounded-lg border bg-muted/30 p-4 text-sm text-muted-foreground space-y-1">
             <p><strong className="text-foreground">{BRAND}</strong></p>
             <p>
-              {t.s13EmailLabel}{' '}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline underline-offset-2">
-                {CONTACT_EMAIL}
+              {t.s13TelegramLabel}{' '}
+              <a
+                href={TELEGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2 hover:no-underline"
+              >
+                {TELEGRAM_HANDLE}
               </a>
             </p>
           </div>

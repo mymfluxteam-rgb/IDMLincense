@@ -386,7 +386,7 @@ export const translations = {
 
       s13Title: '13. Contact Us',
       s13Intro: 'If you have any questions or concerns about these Terms of Service, please contact us:',
-      s13EmailLabel: 'Email:',
+      s13TelegramLabel: 'Telegram:',
     },
 
     langLabel: 'Language',
@@ -767,7 +767,7 @@ export const translations = {
 
       s13Title: '၁၃။ ဆက်သွယ်ရန်',
       s13Intro: 'ဤ ဝန်ဆောင်မှု စည်းကမ်းချက်များနှင့် ပတ်သက်ပြီး မေးခွန်း သို့မဟုတ် စိုးရိမ်ချက်များ ရှိပါက ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ:',
-      s13EmailLabel: 'အီးမေးလ်:',
+      s13TelegramLabel: 'Telegram:',
     },
 
     langLabel: 'ဘာသာစကား',
