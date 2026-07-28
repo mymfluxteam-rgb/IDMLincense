@@ -229,6 +229,98 @@ export const translations = {
       trademark: 'All software is property of their respective publishers. IDM & WinRAR are registered trademarks.',
     },
 
+    privacyPolicy: {
+      badge: 'Legal',
+      title: 'Privacy Policy',
+      lastUpdatedLabel: 'Last updated:',
+      lastUpdatedDate: 'July 27, 2025',
+      intro: 'SoftStore ("SoftStore", "we", "us", or "our") operates this website (the "Service"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or submit a contact request. Please read this policy carefully. If you disagree with its terms, please discontinue use of the Service.',
+
+      s1Title: '1. Information We Collect',
+      s1aTitle: '1.1 Information You Provide Directly',
+      s1aIntro: 'When you contact us, place an order, or use our support form, we may collect:',
+      s1aItems: [
+        'Full name',
+        'Email address',
+        'Message content and support inquiry details',
+        'Software product and license type requested',
+        'Hardware ID (HWID) used for license activation',
+      ],
+      s1bTitle: '1.2 Information Collected Automatically',
+      s1bIntro: 'When you access the Service, certain information may be collected automatically, including:',
+      s1bItems: [
+        'IP address and approximate geographic location',
+        'Browser type, version, and language',
+        'Device type and operating system',
+        'Pages visited and time spent on each page',
+        'Referring URL and exit pages',
+        'Date and time of your visit',
+      ],
+
+      s2Title: '2. Cookies and Tracking Technologies',
+      s2Intro: 'We use cookies and similar tracking technologies to enhance your experience on our Service.',
+      s2TypesTitle: 'Types of Cookies We Use',
+      s2Types: [
+        ['Essential Cookies', 'Required for the website to function properly (e.g., remembering your language and currency preferences).'],
+        ['Analytics Cookies', 'Help us understand how visitors interact with our website so we can improve functionality and content.'],
+        ['Preference Cookies', 'Remember your settings (such as selected language and currency) across sessions.'],
+      ] as [string, string][],
+      s2Note: 'You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, some features of the Service may not function properly if cookies are disabled.',
+
+      s3Title: '3. How We Use Your Information',
+      s3Intro: 'We use the information we collect for the following purposes:',
+      s3Items: [
+        'To process and fulfill license orders and deliver license keys',
+        'To respond to your support inquiries and contact form submissions',
+        'To verify hardware IDs (HWIDs) for license activation',
+        'To send transactional emails related to your order or inquiry',
+        'To improve and optimize the functionality of our website',
+        'To detect, prevent, and address technical issues or fraudulent activity',
+        'To comply with applicable laws and regulations',
+      ],
+      s3Note: 'We do not sell, rent, or share your personal information with third parties for their own marketing purposes.',
+      s3NoteStrong: 'We do not',
+
+      s4Title: '4. Data Sharing and Disclosure',
+      s4Intro: 'We may share your information only in the following limited circumstances:',
+      s4Items: [
+        ['Service Providers', 'With trusted third-party vendors who assist in operating our website and conducting our business (e.g., email delivery services), provided those parties agree to keep this information confidential.'],
+        ['Legal Requirements', 'If required by law, court order, or governmental authority.'],
+        ['Business Transfers', 'In connection with a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction.'],
+      ] as [string, string][],
+
+      s5Title: '5. Third-Party Services',
+      s5Intro: 'Our Service provides links to or facilitates purchases through official publisher websites, including:',
+      s5Note: 'These third-party websites have their own privacy policies. We are not responsible for the privacy practices of these external sites and encourage you to review their policies before providing any personal information.',
+
+      s6Title: '6. Data Retention',
+      s6Body: 'We retain personal data only for as long as necessary to fulfil the purposes for which it was collected, including for the purposes of satisfying any legal, accounting, or reporting requirements. Contact form submissions and order records are typically retained for up to 24 months, after which they are securely deleted.',
+
+      s7Title: '7. Data Security',
+      s7Body: 'We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your data, we cannot guarantee absolute security.',
+
+      s8Title: '8. Your Rights',
+      s8Intro: 'Depending on your location, you may have the following rights regarding your personal data:',
+      s8Items: [
+        ['Access', 'Request a copy of the personal data we hold about you.'],
+        ['Correction', 'Request correction of inaccurate or incomplete data.'],
+        ['Deletion', 'Request deletion of your personal data, subject to certain legal obligations.'],
+        ['Objection', 'Object to processing of your personal data in certain circumstances.'],
+        ['Portability', 'Request transfer of your data to another service provider where technically feasible.'],
+      ] as [string, string][],
+      s8Note: (email: string) => `To exercise any of these rights, please contact us at ${email}.`,
+
+      s9Title: "9. Children's Privacy",
+      s9Body: 'Our Service is not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you become aware that a child has provided us with personal data, please contact us and we will take steps to delete such information.',
+
+      s10Title: '10. Changes to This Privacy Policy',
+      s10Body: 'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date at the top. You are advised to review this Privacy Policy periodically for any changes. Continued use of the Service after changes are posted constitutes your acceptance of those changes.',
+
+      s11Title: '11. Contact Us',
+      s11Intro: 'If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:',
+      s11EmailLabel: 'Email:',
+    },
+
     langLabel: 'Language',
     currencyLabel: 'Currency',
   },
@@ -448,6 +540,98 @@ export const translations = {
       legal: ['ဝန်ဆောင်မှု စည်းကမ်းချက်', 'ကိုယ်ရေးကိုယ်တာ မူဝါဒ'],
       copyright: (year: number) => `© ${year} SoftStore။ မူပိုင်ခွင့် အားလုံး ရယူထားသည်။`,
       trademark: 'ဆော့ဖ်ဝဲများအားလုံးသည် မိမိဆိုင်ရာ ထုတ်ဝေသူများ၏ ပစ္စည်းများဖြစ်သည်။ IDM & WinRAR သည် မှတ်ပုံတင်ထားသော ကုန်အမှတ်တံဆိပ်များ ဖြစ်သည်။',
+    },
+
+    privacyPolicy: {
+      badge: 'ဥပဒေရေးရာ',
+      title: 'ကိုယ်ရေးကိုယ်တာ မူဝါဒ',
+      lastUpdatedLabel: 'နောက်ဆုံး ပြင်ဆင်သည့် နေ့:',
+      lastUpdatedDate: 'ဇူလိုင် ၂၇၊ ၂၀၂၅',
+      intro: 'SoftStore ("SoftStore"၊ "ကျွန်ုပ်တို့") သည် ဤဝဘ်ဆိုဒ် ("ဝန်ဆောင်မှု") ကို လည်ပတ်သည်။ ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒ သည် သင် ကျွန်ုပ်တို့ ဝဘ်ဆိုဒ်ကို သုံးသောအခါ သို့မဟုတ် ဆက်သွယ်ရေး ဖောင် တင်သောအခါ သင့်အချက်အလက်ကို မည်သို့ စုဆောင်း၊ အသုံးပြု၊ ထုတ်ဖော်ပြောကြားကြောင်းကို ရှင်းလင်းပါသည်။ ဤ မူဝါဒကို ဂရုတစိုက် ဖတ်ပါ။ မတ်သင့်ဟု ထင်ပါက ဝန်ဆောင်မှုကို မသုံးပါနှင့်။',
+
+      s1Title: '၁။ ကျွန်ုပ်တို့ စုဆောင်းသော အချက်အလက်များ',
+      s1aTitle: '၁.၁ သင် တိုက်ရိုက် ပေးသော အချက်အလက်',
+      s1aIntro: 'သင် ကျွန်ုပ်တို့ကို ဆက်သွယ်သောအခါ၊ မှာယူမှု ပြုလုပ်သောအခါ သို့မဟုတ် ပံ့ပိုးရေး ဖောင် သုံးသောအခါ အောက်ပါ အချက်အလက်များ စုဆောင်းနိုင်သည်:',
+      s1aItems: [
+        'အမည် အပြည့်အစုံ',
+        'အီးမေးလ် လိပ်စာ',
+        'မက်ဆေ့ အကြောင်းအရာ နှင့် ပံ့ပိုးရေး စုံစမ်းမှု အသေးစိတ်',
+        'တောင်းဆိုသော ဆော့ဖ်ဝဲ ထုတ်ကုန် နှင့် လိုင်စင် အမျိုးအစား',
+        'လိုင်စင် အသက်သွင်းရန် အသုံးပြုသော Hardware ID (HWID)',
+      ],
+      s1bTitle: '၁.၂ အလိုအလျောက် စုဆောင်းသော အချက်အလက်',
+      s1bIntro: 'ဝန်ဆောင်မှုကို ဝင်ရောက်သောအခါ အောက်ပါ အချက်အလက်အချို့ကို အလိုအလျောက် စုဆောင်းနိုင်သည်:',
+      s1bItems: [
+        'IP လိပ်စာ နှင့် မြေပုံပေါ် တည်နေရာ (အနီးစပ်ဆုံး)',
+        'ဘရောင်ဇာ အမျိုးအစား၊ ဗားရှင်း နှင့် ဘာသာစကား',
+        'စက်ပစ္စည်း အမျိုးအစား နှင့် လည်ပတ်မှု စနစ်',
+        'သွားရောက်သော စာမျက်နှာများ နှင့် တစ်ခုချင်းစီတွင် ကြာချိန်',
+        'လွှဲပြောင်းလာသော URL နှင့် ထွက်ခွာသော စာမျက်နှာ',
+        'သွားရောက်သော ရက်စွဲ နှင့် အချိန်',
+      ],
+
+      s2Title: '၂။ Cookie နှင့် Tracking နည်းပညာများ',
+      s2Intro: 'ဝန်ဆောင်မှုပေါ်တွင် သင့် အတွေ့အကြုံ တိုးမြင့်စေရန် Cookie နှင့် ဆင်တူသည့် Tracking နည်းပညာများ အသုံးပြုသည်။',
+      s2TypesTitle: 'ကျွန်ုပ်တို့ အသုံးပြုသော Cookie အမျိုးအစားများ',
+      s2Types: [
+        ['မရှိမဖြစ် Cookie များ', 'ဝဘ်ဆိုဒ် မှန်ကန်စွာ လည်ပတ်နိုင်ရန် လိုအပ်သည် (ဥပမာ — ဘာသာစကား နှင့် ငွေကြေး ရွေးချယ်မှု မှတ်သားထားခြင်း)။'],
+        ['Analytics Cookie များ', 'ဝဘ်ဆိုဒ် လုပ်ဆောင်ချက် နှင့် အကြောင်းအရာ ပိုမိုကောင်းမွန်အောင် လာရောက်သူများ မည်သို့ ဆက်သွယ်ကြောင်း နားလည်ရန် ကူညီသည်။'],
+        ['Preference Cookie များ', 'ဘာသာစကား နှင့် ငွေကြေး ကဲ့သို့သော သင့် ဆက်တင်များကို Session များ တစ်ခုမှ တစ်ခုသို့ မှတ်သားထားသည်။'],
+      ] as [string, string][],
+      s2Note: 'Cookie အားလုံးကို ငြင်းဆန်ရန် သို့မဟုတ် Cookie ပေးပို့သောအခါ ညွှန်ပြရန် ဘရောင်ဇာကို ညွှန်ကြားနိုင်သည်။ သို့သော် Cookie ပိတ်ထားပါက ဝန်ဆောင်မှုအချို့ မှန်ကန်စွာ လည်ပတ်မည် မဟုတ်ပေ။',
+
+      s3Title: '၃။ သင့် အချက်အလက်ကို မည်သို့ အသုံးပြုသည်',
+      s3Intro: 'ကျွန်ုပ်တို့ စုဆောင်းသော အချက်အလက်ကို အောက်ပါ ရည်ရွယ်ချက်များအတွက် အသုံးပြုသည်:',
+      s3Items: [
+        'လိုင်စင် မှာယူမှုများ ဆောင်ရွက်ပြီး လိုင်စင်သော့များ ပေးပို့ရန်',
+        'ပံ့ပိုးရေး စုံစမ်းမှုများ နှင့် ဆက်သွယ်ရေး ဖောင် တင်မှုများကို တုံ့ပြန်ရန်',
+        'လိုင်စင် အသက်သွင်းမှုအတွက် Hardware ID (HWID) စစ်ဆေးရန်',
+        'မှာယူမှု သို့မဟုတ် စုံစမ်းမှုနှင့် ဆက်စပ်သော Transactional အီးမေးလ်များ ပေးပို့ရန်',
+        'ဝဘ်ဆိုဒ် လုပ်ဆောင်ချက် ပိုမိုကောင်းမွန်အောင် ပြင်ဆင်ရန်',
+        'နည်းပညာ ပြဿနာများ သို့မဟုတ် လိမ်လည်မှုဆိုင်ရာ လုပ်ဆောင်ချက်များ တွေ့ရှိ၊ တားဆီး၊ ဖြေရှင်းရန်',
+        'သက်ဆိုင်ရာ ဥပဒေ နှင့် စည်းမျဉ်းများ လိုက်နာရန်',
+      ],
+      s3Note: 'ကျွန်ုပ်တို့သည် သင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်ကို တတိယ ပါတီများ၏ ကိုယ်ပိုင် စျေးကွက်ချဲ့ ရည်ရွယ်ချက်များအတွက် ရောင်း၊ ငှား သို့မဟုတ် မျှဝေမည် မဟုတ်ပေ။',
+      s3NoteStrong: 'မည်သည့် အတွက်မျှ မရောင်းပေ',
+
+      s4Title: '၄။ အချက်အလက် မျှဝေမှု နှင့် ထုတ်ဖော်ပြောကြားမှု',
+      s4Intro: 'အောက်ပါ ကန့်သတ်ထားသော အခြေအနေများတွင်သာ သင့် အချက်အလက်ကို မျှဝေနိုင်သည်:',
+      s4Items: [
+        ['ဝန်ဆောင်မှု ပေးသူများ', 'ကျွန်ုပ်တို့ ဝဘ်ဆိုဒ် လည်ပတ်ရာတွင် ကူညီသော ယုံကြည်ရသည့် တတိယ ပါတီ ကုမ္ပဏီများနှင့် (ဥပမာ — အီးမေးလ် ပေးပို့ရေး ဝန်ဆောင်မှုများ)၊ ထိုပါတီများသည် ဤ အချက်အလက်ကို လျှို့ဝှက်ထားရမည်ဟု သဘောတူသည်ကို အဓိကထားသည်။'],
+        ['ဥပဒေ လိုအပ်ချက်', 'ဥပဒေ၊ တရားရုံး အမိန့် သို့မဟုတ် အစိုးရ အာဏာပိုင်က လိုအပ်ပါက။'],
+        ['စီးပွားရေး လွှဲပြောင်းမှု', 'ပေါင်းစည်းမှု၊ ဝယ်ယူမှု သို့မဟုတ် ပိုင်ဆိုင်မှု ရောင်းချမှုနှင့် ဆက်နွှယ်၍ သင့် အချက်အလက်ကို ထိုသဘောတူညီချက်၏ တစ်စိတ်တစ်ပိုင်းအနေဖြင့် လွှဲပြောင်းနိုင်သည်။'],
+      ] as [string, string][],
+
+      s5Title: '၅။ တတိယ ပါတီ ဝန်ဆောင်မှုများ',
+      s5Intro: 'ကျွန်ုပ်တို့ ဝန်ဆောင်မှုသည် တရားဝင် ထုတ်ဝေသူ ဝဘ်ဆိုဒ်များကို လင့်ခ်ချိတ်ဆက်ခြင်း သို့မဟုတ် ဝယ်ယူမှု ဆောင်ရွက်ပေးသည်၊ ၎င်းတို့မှာ:',
+      s5Note: 'ဤ တတိယ ပါတီ ဝဘ်ဆိုဒ်များတွင် ၎င်းတို့၏ ကိုယ်ပိုင် ကိုယ်ရေးကိုယ်တာ မူဝါဒ ရှိသည်။ ကျွန်ုပ်တို့သည် ဤ ပြင်ပ ဆိုဒ်များ၏ ကိုယ်ရေးကိုယ်တာ အလေ့အကျင့်များအတွက် တာဝန်မယူဘဲ ကိုယ်ရေးကိုယ်တာ အချက်အလက် ပေးမတိုင်မှီ ၎င်းတို့၏ မူဝါဒများ ဖတ်ရှုရန် တိုက်တွန်းသည်။',
+
+      s6Title: '၆။ အချက်အလက် သိမ်းဆည်းကာလ',
+      s6Body: 'ကျွန်ုပ်တို့သည် ကိုယ်ရေးကိုယ်တာ ဒေတာကို စုဆောင်းရသည့် ရည်ရွယ်ချက်များ ဖြည့်ဆည်းရန် လိုအပ်သည့် ကာလ၊ ဥပဒေ၊ စာရင်းကိုင် သို့မဟုတ် အစီရင်ခံမှု လိုအပ်ချက်များ ပြည့်မီသည့် ကာလ ထိသာ သိမ်းဆည်းသည်။ ဆက်သွယ်ရေး ဖောင် တင်မှုများ နှင့် မှာယူမှု မှတ်တမ်းများကို ပုံမှန်အားဖြင့် ၂၄ လ အထိ သိမ်းဆည်းပြီးနောက် လုံခြုံစွာ ဖျက်ပစ်သည်။',
+
+      s7Title: '၇။ ဒေတာ လုံခြုံရေး',
+      s7Body: 'ကျွန်ုပ်တို့သည် သင့် ကိုယ်ရေးကိုယ်တာ အချက်အလက်ကို ခွင့်ပြုချက်မရှိဘဲ ဝင်ရောက်ခြင်း၊ ပြောင်းလဲခြင်း၊ ထုတ်ဖော်ပြောကြားခြင်း သို့မဟုတ် ဖျက်ဆီးခြင်းကို ကာကွယ်ရန် သင့်လျော်သော နည်းပညာဆိုင်ရာ နှင့် အဖွဲ့အစည်းဆိုင်ရာ လုံခြုံရေး အစီအမံများ ချမှတ်ထားသည်။ သို့သော် အင်တာနက်မှတဆင့် ပေးပို့ခြင်း သို့မဟုတ် ဒစ်ဂျစ်တယ် သိမ်းဆည်းမှုနှင့် ဆက်ဆံသည့် မည်သည့် နည်းလမ်းမျှ ၁၀၀% လုံခြုံမည် မဟုတ်ပေ။ ကျွန်ုပ်တို့သည် ဒေတာ ကာကွယ်ရန် စီးပွားဖြစ် လက်ခံနိုင်သော နည်းလမ်းများ အသုံးပြုရန် ကြိုးစားသော်လည်း အပြည့်အဝ လုံခြုံမှုကို အာမခံနိုင်မည် မဟုတ်ပေ။',
+
+      s8Title: '၈။ သင့် အခွင့်အရေးများ',
+      s8Intro: 'သင် နေထိုင်ရာ နေရာပေါ် မူတည်၍ သင့် ကိုယ်ရေးကိုယ်တာ ဒေတာနှင့် ပတ်သက်ပြီး အောက်ပါ အခွင့်အရေးများ ရှိနိုင်သည်:',
+      s8Items: [
+        ['ဝင်ရောက်ကြည့်ရှုခွင့်', 'ကျွန်ုပ်တို့ ထိန်းသိမ်းထားသော သင့် ကိုယ်ရေးကိုယ်တာ ဒေတာ မိတ္တူ တောင်းဆိုနိုင်သည်။'],
+        ['ပြင်ဆင်ခွင့်', 'မမှန်ကန်သော သို့မဟုတ် မပြည့်စုံသော ဒေတာ ပြင်ဆင်ရန် တောင်းဆိုနိုင်သည်။'],
+        ['ဖျက်သိမ်းခွင့်', 'ဥပဒေ ဆိုင်ရာ တာဝန်ဝတ္တရားအချို့ကို ခြွင်းချက်ထား၍ သင့် ကိုယ်ရေးကိုယ်တာ ဒေတာ ဖျက်သိမ်းရန် တောင်းဆိုနိုင်သည်။'],
+        ['ကန့်ကွက်ခွင့်', 'အချို့ အခြေအနေများတွင် သင့် ကိုယ်ရေးကိုယ်တာ ဒေတာ စီမံဆောင်ရွက်ခြင်းကို ကန့်ကွက်နိုင်သည်။'],
+        ['လွှဲပြောင်းခွင့်', 'နည်းပညာ အရ ဖြစ်နိုင်ပါက ဒေတာကို အခြား ဝန်ဆောင်မှု ပေးသူထံ လွှဲပြောင်းရန် တောင်းဆိုနိုင်သည်။'],
+      ] as [string, string][],
+      s8Note: (email: string) => `ဤ အခွင့်အရေးများ ထိုးကြွင်းရန် ${email} တွင် ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ။`,
+
+      s9Title: '၉။ ကလေးများ၏ ကိုယ်ရေးကိုယ်တာ',
+      s9Body: 'ကျွန်ုပ်တို့ ဝန်ဆောင်မှုသည် အသက် ၁၃ နှစ်အောက် ကလေးများကို ဦးတည်မဆောင်ပေ။ ကျွန်ုပ်တို့သည် အသက် ၁၃ နှစ်အောက် ကလေးများထံမှ ကိုယ်ရေးကိုယ်တာ အချက်အလက် သိသိသာသာ မစုဆောင်းပေ။ ကလေးတစ်ဦးက ကျွန်ုပ်တို့ကို ကိုယ်ရေးကိုယ်တာ ဒေတာ ပေးခဲ့သည်ကို သိပါက ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ — ထိုအချက်အလက် ဖျက်သိမ်းရန် လုပ်ဆောင်ပေးမည်။',
+
+      s10Title: '၁၀။ ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒ ပြောင်းလဲမှုများ',
+      s10Body: 'ကျွန်ုပ်တို့သည် ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒကို အခါအားလျော်စွာ ပြင်ဆင်နိုင်သည်။ မည်သည့် ပြောင်းလဲမှုမဆို ဤ စာမျက်နှာတွင် မူဝါဒ အသစ် တင်ပြပြီး "နောက်ဆုံး ပြင်ဆင်သည့် နေ့" ကို ပြောင်းလဲ၍ အကြောင်းကြားပေးမည်။ ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒကို ကာလအားလျော်စွာ ပြန်လည် ဖတ်ရှုရန် တိုက်တွန်းသည်။ ပြောင်းလဲမှုများ တင်ပြပြီးနောက် ဝန်ဆောင်မှု ဆက်လက် သုံးစွဲသောအခါ ထိုပြောင်းလဲမှုများကို လက်ခံသည်ဟု မှတ်ယူသည်။',
+
+      s11Title: '၁၁။ ဆက်သွယ်ရန်',
+      s11Intro: 'ဤ ကိုယ်ရေးကိုယ်တာ မူဝါဒနှင့် ပတ်သက်ပြီး မေးခွန်း၊ စိုးရိမ်ချက် သို့မဟုတ် တောင်းဆိုမှုများ ရှိပါက ကျွန်ုပ်တို့ကို ဆက်သွယ်ပါ:',
+      s11EmailLabel: 'အီးမေးလ်:',
     },
 
     langLabel: 'ဘာသာစကား',
