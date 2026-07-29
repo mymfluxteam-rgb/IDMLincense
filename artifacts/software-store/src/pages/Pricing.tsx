@@ -4,26 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Link } from 'wouter';
 import { useGeo } from '@/context/GeoContext';
-import { translations } from '@/context/translations';
+import { translations, formatPrice } from '@/context/translations';
 
-// Fixed prices — keyed by package then currency
-const PRICES = {
-  '1year': {
-    MMK: { original: 30000, discounted: 25000, savings: 5000 },
-    USD: { original: 7.14, discounted: 5.95, savings: 1.19 },
-  },
-  lifetime: {
-    MMK: { original: 60000, discounted: 50000, savings: 10000 },
-    USD: { original: 14.28, discounted: 11.90, savings: 2.38 },
-  },
+// USD base prices — keyed by package
+const PRICES_USD = {
+  '1year': { original: 7.14, discounted: 5.95, savings: 1.19 },
+  lifetime: { original: 14.28, discounted: 11.90, savings: 2.38 },
 } as const;
-
-function fmtMMK(n: number) {
-  return `K ${n.toLocaleString()}`;
-}
-function fmtUSD(n: number) {
-  return `$${n.toFixed(2)}`;
-}
 
 export default function Pricing() {
   const { locale, currency } = useGeo();
@@ -60,12 +47,12 @@ export default function Pricing() {
       {/* Package cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         {packages.map((pkg) => {
-          const prices = PRICES[pkg.key][currency];
+          const prices = PRICES_USD[pkg.key];
           const features = t.features[pkg.key];
 
-          const originalDisplay = currency === 'MMK' ? fmtMMK(prices.original) : fmtUSD(prices.original);
-          const discountedDisplay = currency === 'MMK' ? fmtMMK(prices.discounted) : fmtUSD(prices.discounted);
-          const savingsDisplay = currency === 'MMK' ? fmtMMK(prices.savings) : fmtUSD(prices.savings);
+          const originalDisplay = formatPrice(prices.original, currency);
+          const discountedDisplay = formatPrice(prices.discounted, currency);
+          const savingsDisplay = formatPrice(prices.savings, currency);
 
           return (
             <Card
