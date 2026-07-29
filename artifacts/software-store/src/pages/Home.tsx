@@ -152,7 +152,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {products.map((product) => {
             const features = t.features[product.featureKey];
-            const description = productDescriptions[locale][product.descKey];
+            const description = (productDescriptions[locale] ?? productDescriptions['en'])[product.descKey];
             return (
               <Card
                 key={product.id}
