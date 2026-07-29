@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'wouter';
-import { Download, Menu, X, ShieldCheck, Globe, DollarSign } from 'lucide-react';
+import { Menu, X, ShieldCheck, Globe, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useGeo } from '@/context/GeoContext';
@@ -39,9 +39,11 @@ export function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm group-hover:shadow-md transition-shadow">
-            <Download className="h-4 w-4" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="SoftwareStore Logo"
+            className="h-10 w-10 object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all rounded-sm"
+          />
           <div className="leading-none hidden sm:block">
             <span className="font-bold tracking-tight text-foreground block">{ui.brand}</span>
             <span className="text-[10px] text-muted-foreground font-medium tracking-wide">{ui.brandSub}</span>
