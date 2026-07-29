@@ -30,6 +30,31 @@ function getStored<T extends string>(key: string, fallback: T): T {
   }
 }
 
+/** Map a country code to the best default locale */
+function countryToLocale(code: string): Locale {
+  if (code === 'MM') return 'my';
+  if (code === 'TH') return 'th';
+  if (['CN', 'HK', 'TW', 'MO'].includes(code)) return 'zh';
+  if (code === 'JP') return 'ja';
+  if (code === 'KR') return 'ko';
+  return 'en';
+}
+
+/** Map a country code to the best default currency */
+function countryToCurrency(code: string): Currency {
+  if (code === 'MM') return 'MMK';
+  if (code === 'TH') return 'THB';
+  if (['CN', 'MO'].includes(code)) return 'CNY';
+  if (code === 'JP') return 'JPY';
+  if (code === 'KR') return 'KRW';
+  if (code === 'SG') return 'SGD';
+  // EU countries → EUR
+  const euCountries = ['DE', 'FR', 'ES', 'IT', 'NL', 'BE', 'AT', 'PT', 'FI', 'IE',
+    'GR', 'LU', 'SI', 'SK', 'EE', 'LV', 'LT', 'MT', 'CY', 'HR'];
+  if (euCountries.includes(code)) return 'EUR';
+  return 'USD';
+}
+
 export function GeoProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => getStored<Locale>(LS_LOCALE, 'en'));
   const [currency, setCurrencyState] = useState<Currency>(() => getStored<Currency>(LS_CURRENCY, 'USD'));
@@ -55,12 +80,12 @@ export function GeoProvider({ children }: { children: React.ReactNode }) {
         const code = data.country_code ?? '';
         setCountry(code);
         if (!hadLocale) {
-          const detectedLocale: Locale = code === 'MM' ? 'my' : 'en';
+          const detectedLocale = countryToLocale(code);
           setLocaleState(detectedLocale);
           localStorage.setItem(LS_LOCALE, detectedLocale);
         }
         if (!hadCurrency) {
-          const detectedCurrency: Currency = code === 'MM' ? 'MMK' : 'USD';
+          const detectedCurrency = countryToCurrency(code);
           setCurrencyState(detectedCurrency);
           localStorage.setItem(LS_CURRENCY, detectedCurrency);
         }
@@ -98,13 +123,4 @@ export function GeoProvider({ children }: { children: React.ReactNode }) {
 
 export function useGeo() {
   return useContext(GeoContext);
-}
-
-/** Shorthand: returns the translation object for the current locale */
-export function useT() {
-  const { locale } = useGeo();
-  // Import is resolved statically at build time — this is safe in a Vite/ESM project
-  return (locale === 'my'
-    ? (import('./translations') as unknown as { translations: typeof import('./translations').translations })
-    : null) as never; // consumers should use `translations[locale]` directly
 }

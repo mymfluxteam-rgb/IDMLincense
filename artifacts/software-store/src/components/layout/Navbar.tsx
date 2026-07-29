@@ -5,6 +5,32 @@ import { useState } from 'react';
 import { useGeo } from '@/context/GeoContext';
 import { translations, type Locale, type Currency } from '@/context/translations';
 
+const LOCALES: { value: Locale; label: string; flag: string }[] = [
+  { value: 'en', label: 'English',  flag: '🇬🇧' },
+  { value: 'my', label: 'မြန်မာ',   flag: '🇲🇲' },
+  { value: 'zh', label: '中文',      flag: '🇨🇳' },
+  { value: 'th', label: 'ภาษาไทย',  flag: '🇹🇭' },
+  { value: 'ja', label: '日本語',    flag: '🇯🇵' },
+  { value: 'ko', label: '한국어',    flag: '🇰🇷' },
+];
+
+const CURRENCIES: { value: Currency; label: string }[] = [
+  { value: 'USD', label: 'USD $' },
+  { value: 'MMK', label: 'MMK K' },
+  { value: 'EUR', label: 'EUR €' },
+  { value: 'THB', label: 'THB ฿' },
+  { value: 'CNY', label: 'CNY ¥' },
+  { value: 'SGD', label: 'SGD S$' },
+  { value: 'JPY', label: 'JPY ¥' },
+  { value: 'KRW', label: 'KRW ₩' },
+];
+
+const selectCls =
+  'h-8 rounded-md border border-input bg-muted/50 px-2 py-0 text-xs font-semibold text-foreground ' +
+  'focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer appearance-none pr-6 ' +
+  'bg-[url("data:image/svg+xml,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20width%3D\'10\'%20height%3D\'6\'%20viewBox%3D\'0%200%2010%206\'%3E%3Cpath%20d%3D\'M0%200l5%206%205-6z\'%20fill%3D\'%236b7280\'%2F%3E%3C%2Fsvg%3E")] ' +
+  'bg-no-repeat bg-[right_0.4rem_center]';
+
 export function Navbar() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
@@ -22,16 +48,6 @@ export function Navbar() {
 
   const isActive = (href: string) =>
     href === '/' ? location === '/' : location.startsWith(href);
-
-  const locales: { value: Locale; label: string }[] = [
-    { value: 'en', label: 'EN' },
-    { value: 'my', label: 'မြန်မာ' },
-  ];
-
-  const currencies: { value: Currency; label: string }[] = [
-    { value: 'USD', label: 'USD $' },
-    { value: 'MMK', label: 'MMK K' },
-  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm">
@@ -71,39 +87,37 @@ export function Navbar() {
         {/* Language + Currency switcher (desktop) */}
         <div className="hidden md:flex items-center gap-2 shrink-0">
           {/* Language */}
-          <div className="flex items-center gap-1 rounded-lg border bg-muted/50 p-0.5">
-            <Globe className="h-3.5 w-3.5 text-muted-foreground ml-1.5" />
-            {locales.map((l) => (
-              <button
-                key={l.value}
-                onClick={() => setLocale(l.value)}
-                className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
-                  locale === l.value
-                    ? 'bg-background text-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {l.label}
-              </button>
-            ))}
+          <div className="flex items-center gap-1.5">
+            <Globe className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <select
+              value={locale}
+              onChange={(e) => setLocale(e.target.value as Locale)}
+              aria-label="Select language"
+              className={selectCls}
+            >
+              {LOCALES.map((l) => (
+                <option key={l.value} value={l.value}>
+                  {l.flag} {l.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Currency */}
-          <div className="flex items-center gap-1 rounded-lg border bg-muted/50 p-0.5">
-            <DollarSign className="h-3.5 w-3.5 text-muted-foreground ml-1" />
-            {currencies.map((c) => (
-              <button
-                key={c.value}
-                onClick={() => setCurrency(c.value)}
-                className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
-                  currency === c.value
-                    ? 'bg-background text-foreground shadow-sm'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {c.value}
-              </button>
-            ))}
+          <div className="flex items-center gap-1.5">
+            <DollarSign className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as Currency)}
+              aria-label="Select currency"
+              className={selectCls}
+            >
+              {CURRENCIES.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
@@ -139,41 +153,35 @@ export function Navbar() {
 
           {/* Mobile lang/currency row */}
           <div className="pt-3 mt-2 border-t border-border/60 flex flex-wrap gap-3 px-3">
-            <div className="flex items-center gap-1">
-              <Globe className="h-3.5 w-3.5 text-muted-foreground" />
-              <div className="flex items-center gap-1 rounded-lg border bg-muted/50 p-0.5">
-                {locales.map((l) => (
-                  <button
-                    key={l.value}
-                    onClick={() => setLocale(l.value)}
-                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
-                      locale === l.value
-                        ? 'bg-background text-foreground shadow-sm'
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {l.label}
-                  </button>
+            <div className="flex items-center gap-1.5">
+              <Globe className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+              <select
+                value={locale}
+                onChange={(e) => setLocale(e.target.value as Locale)}
+                aria-label="Select language"
+                className={selectCls}
+              >
+                {LOCALES.map((l) => (
+                  <option key={l.value} value={l.value}>
+                    {l.flag} {l.label}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
-            <div className="flex items-center gap-1">
-              <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
-              <div className="flex items-center gap-1 rounded-lg border bg-muted/50 p-0.5">
-                {currencies.map((c) => (
-                  <button
-                    key={c.value}
-                    onClick={() => setCurrency(c.value)}
-                    className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-colors ${
-                      currency === c.value
-                        ? 'bg-background text-foreground shadow-sm'
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {c.value}
-                  </button>
+            <div className="flex items-center gap-1.5">
+              <DollarSign className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as Currency)}
+                aria-label="Select currency"
+                className={selectCls}
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
           </div>
 
