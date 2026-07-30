@@ -72,7 +72,7 @@ export default function HowToPurchase() {
           <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
             <iframe
               className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/52Cqm_-4YaE?si=zcY6G2gf5McYp_Hi"
+              src="https://www.youtube.com/embed/oYGCiPBxS_k?si=xDFoYVeunUUpjjKK"
               title="How to Buy & Activate License - Step-by-Step Tutorial"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
